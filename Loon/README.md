@@ -22,7 +22,19 @@ visible immediately after importing `Loon.conf` on networks that can reach
 GitHub. Its scripts use Sub-Store's official `release` branch to avoid GitHub
 Release download redirects. The parser plugin is listed but disabled by default
 because it requires Loon 3.5.0 (969) or newer. Generate and trust Loon's MITM
-certificate, then open `https://sub.store` to manage subscriptions and
-production. The profile also lists advertising, redirect, Spotify, YouTube,
+certificate, choose a working route in the `Sub-Store` policy group, then open
+`https://sub.store` to manage subscriptions and production. `DIRECT` is valid
+when the local network can reach the official frontend. The profile also
+lists advertising, redirect, Spotify, YouTube,
 BiliBili, and legacy Emby plugins as disabled opt-ins; enable one at a time
 after checking the affected app.
+
+`sub.store` is a local rewrite endpoint rather than a public Sub-Store website.
+The profile maps it to `127.0.0.1`, so it cannot send an unhandled request to
+the public domain. Keep the Sub-Store plugin enabled before opening that URL.
+
+If the page reports that its server did not respond, open
+`https://sub.store/api/utils/env`. It must return environment/version data. If
+only `http://sub.store/api/utils/env` works, regenerate and trust Loon's MITM
+certificate. If neither works, update the plugin, confirm scripts and rewrites
+are enabled, then check whether another plugin replaces `hostname=sub.store`.
