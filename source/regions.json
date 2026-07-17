@@ -1,0 +1,8 @@
+{
+  "hongKong": "(?i)(Hong Kong|HongKong|香港|🇭🇰|(^|[-._ ])(HK|HKG)($|[-._ ]))",
+  "japan": "(?i)(Japan|日本|东京|大阪|埼玉|🇯🇵|(^|[-._ ])JP($|[-._ ]))",
+  "singapore": "(?i)(Singapore|新加坡|狮城|🇸🇬|(^|[-._ ])SG($|[-._ ]))",
+  "unitedStates": "(?i)(United States|美国|美西|美东|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|🇺🇸|(^|[-._ ])(US|USA)($|[-._ ]))",
+  "unitedKingdom": "(?i)(United Kingdom|英国|伦敦|Manchester|🇬🇧|(^|[-._ ])(UK|GB)($|[-._ ]))",
+  "taiwan": "(?i)(Taiwan|台湾|台北|🇹🇼|(^|[-._ ])TW($|[-._ ]))"
+}

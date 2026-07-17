@@ -1,0 +1,20 @@
+#!name=Sub-Store
+#!desc=Subscription management with scheduled synchronization and production.
+#!openUrl=https://sub.store
+#!homepage=https://github.com/sub-store-org/Sub-Store
+
+[Argument]
+cron=input, "55 23 * * *", tag=Sync Schedule, desc=CRON expression for syncing configuration
+sync_success_notify=switch, true, tag=Sync Notification, desc=Notify when synchronization succeeds
+cors=input, "https://sub-store.vercel.app,http://substore.stash,https://substore.stash", tag=CORS Origins, desc=Allowed web origins; do not use *
+
+[Rule]
+DOMAIN,sub-store.vercel.app,PROXY
+
+[MITM]
+hostname=sub.store
+
+[Script]
+http-request ^https?:\/\/sub\.store\/((download)|api\/(preview|sync|(utils\/node-info))) script-path=https://github.com/sub-store-org/Sub-Store/releases/download/2.36.7/sub-store-1.min.js, requires-body=true,max-size=-1, timeout=900, tag=Sub-Store Core, argument=[{cors}]
+http-request ^https?:\/\/sub\.store script-path=https://github.com/sub-store-org/Sub-Store/releases/download/2.36.7/sub-store-0.min.js, requires-body=true,max-size=-1, timeout=900, tag=Sub-Store Simple, argument=[{cors}]
+cron {cron} script-path=https://github.com/sub-store-org/Sub-Store/releases/download/2.36.7/cron-sync-artifacts.min.js, timeout=900, tag=Sub-Store Sync, argument=[{sync_success_notify,cors}]

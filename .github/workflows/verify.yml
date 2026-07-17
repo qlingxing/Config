@@ -1,0 +1,46 @@
+name: Verify Profiles
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  configuration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build profiles
+        run: scripts/build-profiles.sh
+      - name: Validate generated profiles
+        run: scripts/validate-profiles.sh
+      - name: Validate source files
+        run: |
+          sh -n scripts/*.sh
+          jq empty source/versions.json source/regions.json source/modules.json
+          git diff --check
+          git diff --exit-code
+
+  resource-health:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    needs: configuration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build profiles
+        run: scripts/build-profiles.sh
+      - name: Verify remote resources
+        run: scripts/verify-remote-resources.sh
+      - name: Verify active resources
+        run: scripts/verify-active-resources.sh

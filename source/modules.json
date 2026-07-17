@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "versions": {
+    "subStore": "source/versions.json"
+  },
+  "tiers": ["core", "recommended", "experimental", "legacy"],
+  "modules": [
+    {
+      "id": "sub-store",
+      "tier": "core",
+      "purpose": "subscription management, synchronization, and production",
+      "clients": {
+        "quantumultX": "built into QuantumultX/qlingxing.conf",
+        "surge": "Surge/Module/Surge.sgmodule",
+        "loon": "Loon/Plugins/Sub-Store.plugin"
+      },
+      "mitm": ["sub.store"]
+    },
+    {
+      "id": "advertising-rewrite",
+      "tier": "recommended",
+      "purpose": "advertising and tracking cleanup",
+      "clients": {
+        "quantumultX": "enabled in QuantumultX/qlingxing.conf",
+        "surge": "Surge/Modules/AdBlock.sgmodule",
+        "loon": "Loon/Plugins/README.md"
+      },
+      "mitm": ["depends on upstream module"]
+    },
+    {
+      "id": "redirect-cleanup",
+      "tier": "recommended",
+      "purpose": "web redirect cleanup",
+      "clients": {
+        "quantumultX": "enabled in QuantumultX/qlingxing.conf",
+        "surge": "Surge/Modules/README.md",
+        "loon": "Loon/Plugins/README.md"
+      },
+      "mitm": ["depends on upstream module"]
+    },
+    {
+      "id": "service-response-rewrite",
+      "tier": "experimental",
+      "purpose": "service-specific response modification; account entitlements are not guaranteed",
+      "clients": {
+        "quantumultX": "disabled Spotify, BiliBili, and host-specific Emby rewrites",
+        "surge": "Surge/Module/spotify.module and Surge/Modules/BiliBili-AdBlock.sgmodule",
+        "loon": "Loon/Plugins/Spotify-Enhance.plugin, YouTube-AdBlock.plugin, BiliBili-Enhance.plugin, and a mb3admin.com-only Emby legacy plugin"
+      },
+      "mitm": ["service-specific"],
+      "defaultEnabled": false
+    },
+    {
+      "id": "emby-routing",
+      "tier": "recommended",
+      "purpose": "route known Emby service domains to a selectable proxy policy",
+      "clients": {
+        "quantumultX": "enabled in QuantumultX/qlingxing.conf",
+        "surge": "enabled in Surge/macOS/Surge-6.conf and Surge/iOS/Surge-6.conf",
+        "loon": "enabled in Loon/Loon.conf"
+      },
+      "mitm": []
+    },
+    {
+      "id": "legacy-ad-rewrite",
+      "tier": "legacy",
+      "purpose": "broad iOS app rewrite collection",
+      "clients": {
+        "surge": "Surge/ad.sgmodule"
+      },
+      "defaultEnabled": false
+    }
+  ]
+}

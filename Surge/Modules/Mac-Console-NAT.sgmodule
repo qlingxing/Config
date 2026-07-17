@@ -1,0 +1,6 @@
+#!name=Mac Console NAT Support
+#!desc=Use only when Surge Mac provides routing for game consoles on the LAN.
+#!system=mac
+
+[General]
+always-real-ip = %APPEND% *.srv.nintendo.net, *.stun.playstation.net, xbox.*.microsoft.com, *.xboxlive.com

@@ -1,0 +1,13 @@
+#!name=Spotify Enhance (iOS 15+)
+#!desc=Experimental: removes playback ads and shuffle restrictions. Very high audio quality remains unavailable.
+#!openUrl=https://github.com/app2smile/rules
+
+[Rewrite]
+^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/user-customization-service\/v1\/customize$ header-del if-none-match
+
+[Mitm]
+hostname = spclient.wg.spotify.com, *spclient.spotify.com
+
+[Script]
+http-request ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/ script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js, timeout=10, tag=spotifyJson
+http-response ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$ script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js, requires-body=true, binary-body-mode=true, timeout=10, tag=spotifyProto

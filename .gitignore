@@ -1,1 +1,6 @@
 .DS_Store
+*.p12
+*.pem
+*.key
+*.private.conf
+*.secrets.conf
