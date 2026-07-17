@@ -1,7 +1,8 @@
 # Loon Plugins
 
-The base profile loads the official Sub-Store plugin, so it is visible in
-Loon's Plugins screen immediately after importing `Loon.conf`. The official
+The base profile downloads the official Sub-Store plugin directly, so it is
+visible in Loon's Plugins screen immediately after importing `Loon.conf` on
+networks that can reach GitHub. The official
 Sub-Store Parser is listed as a disabled opt-in because it needs Loon 3.5.0
 (969) or newer. The other entries are also disabled opt-ins. Generate and trust
 Loon's MITM certificate before enabling a rewrite or response plugin.

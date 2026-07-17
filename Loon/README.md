@@ -17,8 +17,9 @@ are kept out of the base profile. Install Sub-Store and optional rewrite plugins
 from `Plugins/README.md` after creating and trusting Loon's local MITM
 certificate.
 
-The base profile loads the official Sub-Store plugin, which is visible
-immediately after importing `Loon.conf`. The official parser plugin is listed
+The base profile downloads the official Sub-Store plugin directly, which is
+visible immediately after importing `Loon.conf` on networks that can reach
+GitHub. The official parser plugin is listed
 but disabled by default because it requires Loon 3.5.0 (969) or newer. Generate
 and trust Loon's MITM certificate, then open `https://sub.store` to manage
 subscriptions and production. The profile also lists advertising, redirect,
