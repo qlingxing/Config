@@ -1,8 +1,0 @@
-#!name=Emby Public Service Enhance (Legacy)
-#!desc=Experimental and legacy: applies only to mb3admin.com. It does not support self-hosted or arbitrary Emby servers.
-
-[Mitm]
-hostname = mb3admin.com
-
-[Script]
-http-response ^https?:\/\/mb3admin\.com\/admin\/service\/registration\/validateDevice script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/quantumult-x/unlock.js, requires-body=true, timeout=10, tag=embyPublicPlayback

@@ -70,14 +70,7 @@ build_copy() {
 }
 
 build_copy "$ROOT/source/quantumultx/qlingxing.conf" "$ROOT/QuantumultX/qlingxing.conf"
-build_copy "$ROOT/source/quantumultx/Sub-Store.conf" "$ROOT/QuantumultX/Modules/Sub-Store.conf"
 build_copy "$ROOT/source/loon/Loon.conf" "$ROOT/Loon/Loon.conf"
-build_copy "$ROOT/source/loon/Sub-Store.plugin" "$ROOT/Loon/Plugins/Sub-Store.plugin"
-build_copy "$ROOT/source/loon/Sub-Store-Parser.plugin" "$ROOT/Loon/Plugins/Sub-Store-Parser.plugin"
-build_copy "$ROOT/source/loon/Spotify-Enhance.plugin" "$ROOT/Loon/Plugins/Spotify-Enhance.plugin"
-build_copy "$ROOT/source/loon/YouTube-AdBlock.plugin" "$ROOT/Loon/Plugins/YouTube-AdBlock.plugin"
-build_copy "$ROOT/source/loon/BiliBili-Enhance.plugin" "$ROOT/Loon/Plugins/BiliBili-Enhance.plugin"
-build_copy "$ROOT/source/loon/Emby-Public-Experimental.plugin" "$ROOT/Loon/Plugins/Emby-Public-Experimental.plugin"
 build_copy "$ROOT/source/surge/Sub-Store.sgmodule" "$ROOT/Surge/Module/Surge.sgmodule"
 build_copy "$ROOT/source/surge/Spotify.module" "$ROOT/Surge/Module/spotify.module"
 build_copy "$ROOT/source/surge/BiliBili-AdBlock.sgmodule" "$ROOT/Surge/Modules/BiliBili-AdBlock.sgmodule"

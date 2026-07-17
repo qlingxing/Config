@@ -10,9 +10,9 @@
       "tier": "core",
       "purpose": "subscription management, synchronization, and production",
       "clients": {
-        "quantumultX": "named remote module in QuantumultX/qlingxing.conf",
+        "quantumultX": "official config/QX.snippet remote resource in QuantumultX/qlingxing.conf",
         "surge": "Surge/Module/Surge.sgmodule",
-        "loon": "Loon/Plugins/Sub-Store.plugin"
+        "loon": "official config/Loon.plugin remote resource in Loon/Loon.conf"
       },
       "mitm": ["sub.store"]
     },
@@ -45,7 +45,7 @@
       "clients": {
         "quantumultX": "disabled Spotify, BiliBili, and host-specific Emby rewrites",
         "surge": "Surge/Module/spotify.module and Surge/Modules/BiliBili-AdBlock.sgmodule",
-        "loon": "Loon/Plugins/Spotify-Enhance.plugin, YouTube-AdBlock.plugin, BiliBili-Enhance.plugin, and a mb3admin.com-only Emby legacy plugin"
+        "loon": "not included in the base profile; add a directly maintained upstream plugin when needed"
       },
       "mitm": ["service-specific"],
       "defaultEnabled": false

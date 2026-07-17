@@ -1,9 +1,0 @@
-#!name=YouTube Ad Block (iOS 15+)
-#!desc=Experimental: removes Home and recommendation-feed ads. It does not remove in-stream ads.
-#!openUrl=https://github.com/app2smile/rules
-
-[Mitm]
-hostname = youtubei.googleapis.com
-
-[Script]
-http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next) script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/youtube.js, requires-body=true, binary-body-mode=true, timeout=10, tag=youtubeProto

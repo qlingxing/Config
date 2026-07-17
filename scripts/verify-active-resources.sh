@@ -13,13 +13,7 @@ set -- \
   "$ROOT/Surge/Module/spotify.module" \
   "$ROOT/Surge/Modules/BiliBili-AdBlock.sgmodule" \
   "$ROOT/Surge/Modules/Emby-Public-Experimental.sgmodule" \
-  "$ROOT/Loon/Loon.conf" \
-  "$ROOT/Loon/Plugins/Sub-Store.plugin" \
-  "$ROOT/Loon/Plugins/Sub-Store-Parser.plugin" \
-  "$ROOT/Loon/Plugins/Spotify-Enhance.plugin" \
-  "$ROOT/Loon/Plugins/YouTube-AdBlock.plugin" \
-  "$ROOT/Loon/Plugins/BiliBili-Enhance.plugin" \
-  "$ROOT/Loon/Plugins/Emby-Public-Experimental.plugin"
+  "$ROOT/Loon/Loon.conf"
 
 awk '
   !/^[[:space:]]*(#|;|\/\/)/ && /https?:\/\// {

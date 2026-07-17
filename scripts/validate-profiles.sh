@@ -8,12 +8,10 @@ VERSION=$(jq -er '.subStore' "$VERSION_FILE")
 
 generated_files='
   QuantumultX/qlingxing.conf
-  QuantumultX/Modules/Sub-Store.conf
   Surge/macOS/Surge-6.conf
   Surge/iOS/Surge-6.conf
   Surge/Module/Surge.sgmodule
   Loon/Loon.conf
-  Loon/Plugins/Sub-Store.plugin
 '
 
 failed=0
@@ -27,7 +25,6 @@ for relative_path in $generated_files; do
 done
 
 for relative_path in \
-  source/quantumultx/Sub-Store.conf \
   source/surge/Sub-Store.sgmodule \
   source/remote-resources.txt; do
   if ! rg -q '\{\{SUB_STORE_VERSION\}\}' "$ROOT/$relative_path"; then
@@ -36,16 +33,13 @@ for relative_path in \
   fi
 done
 
-if ! rg -q 'QuantumultX/Modules/Sub-Store\.conf,tag=Sub-Store' "$ROOT/QuantumultX/qlingxing.conf"; then
-  printf 'FAIL Quantumult X is missing its named Sub-Store module entry\n' >&2
+if ! rg -q 'sub-store-org/Sub-Store/master/config/QX\.snippet,tag=Sub-Store' "$ROOT/QuantumultX/qlingxing.conf"; then
+  printf 'FAIL Quantumult X is missing its official named Sub-Store module entry\n' >&2
   failed=1
 fi
 
 versions=$(rg -o 'releases/download/[0-9]+\.[0-9]+\.[0-9]+' \
-  "$ROOT/QuantumultX/qlingxing.conf" \
-  "$ROOT/QuantumultX/Modules/Sub-Store.conf" \
-  "$ROOT/Surge/Module/Surge.sgmodule" \
-  "$ROOT/Loon/Plugins/Sub-Store.plugin" |
+  "$ROOT/Surge/Module/Surge.sgmodule" |
   sed 's#.*releases/download/##' |
   sort -u)
 
