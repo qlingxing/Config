@@ -1,16 +1,17 @@
 # Loon Plugins
 
-The base profile downloads the official Sub-Store plugin directly, so it is
-visible in Loon's Plugins screen immediately after importing `Loon.conf` on
-networks that can reach GitHub. The official
-Sub-Store Parser is listed as a disabled opt-in because it needs Loon 3.5.0
-(969) or newer. The other entries are also disabled opt-ins. Generate and trust
-Loon's MITM certificate before enabling a rewrite or response plugin.
+The base profile downloads a compatibility wrapper that uses Sub-Store's
+official `release` branch assets, so it avoids GitHub Release download
+redirects. It is visible in Loon's Plugins screen immediately after importing
+`Loon.conf` on networks that can reach GitHub. The matching parser is listed as
+a disabled opt-in because it needs Loon 3.5.0 (969) or newer. The other entries
+are also disabled opt-ins. Generate and trust Loon's MITM certificate before
+enabling a rewrite or response plugin.
 
 | Tier | Plugin | Source | MITM |
 | --- | --- | --- | --- |
-| Core | Sub-Store | Official Sub-Store Loon plugin | `sub.store` only |
-| Core | Sub-Store Parser | Official Sub-Store Loon parser plugin | No MITM |
+| Core | `Sub-Store.plugin` | Official Sub-Store release assets via this compatibility wrapper | `sub.store` only |
+| Core | `Sub-Store-Parser.plugin` | Official Sub-Store release assets via this compatibility wrapper | No MITM |
 | Recommended | Advertising rewrite | `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Loon/Advertising/Advertising.plugin` | Required for URL rules |
 | Recommended | Redirect cleanup | `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Loon/Redirect/Redirect.plugin` | Check upstream hosts |
 | Experimental | `YouTube-AdBlock.plugin` | This repository | `youtubei.googleapis.com` |
