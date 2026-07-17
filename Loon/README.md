@@ -17,9 +17,10 @@ are kept out of the base profile. Install Sub-Store and optional rewrite plugins
 from `Plugins/README.md` after creating and trusting Loon's local MITM
 certificate.
 
-Sub-Store is now included in the base profile's `[Plugin]` section, so it is
-visible immediately in Loon after importing `Loon.conf`. Generate and trust
-Loon's MITM certificate, then open `https://sub.store` to manage subscriptions
-and production. The profile also lists advertising, redirect, Spotify, YouTube,
-BiliBili, and legacy Emby plugins as disabled opt-ins; enable one at a time
-after checking the affected app.
+The base profile loads the official Sub-Store plugin, which is visible
+immediately after importing `Loon.conf`. The official parser plugin is listed
+but disabled by default because it requires Loon 3.5.0 (969) or newer. Generate
+and trust Loon's MITM certificate, then open `https://sub.store` to manage
+subscriptions and production. The profile also lists advertising, redirect,
+Spotify, YouTube, BiliBili, and legacy Emby plugins as disabled opt-ins; enable
+one at a time after checking the affected app.

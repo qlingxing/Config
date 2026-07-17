@@ -28,7 +28,6 @@ done
 
 for relative_path in \
   source/quantumultx/Sub-Store.conf \
-  source/loon/Sub-Store.plugin \
   source/surge/Sub-Store.sgmodule \
   source/remote-resources.txt; do
   if ! rg -q '\{\{SUB_STORE_VERSION\}\}' "$ROOT/$relative_path"; then

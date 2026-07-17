@@ -1,13 +1,15 @@
 # Loon Plugins
 
-Sub-Store is loaded by the base profile and is visible in Loon's Plugins screen
-immediately after importing `Loon.conf`. The other entries are listed in that
-same screen as disabled opt-ins. Generate and trust Loon's MITM certificate
-before enabling a rewrite or response plugin.
+The base profile loads the official Sub-Store plugin, so it is visible in
+Loon's Plugins screen immediately after importing `Loon.conf`. The official
+Sub-Store Parser is listed as a disabled opt-in because it needs Loon 3.5.0
+(969) or newer. The other entries are also disabled opt-ins. Generate and trust
+Loon's MITM certificate before enabling a rewrite or response plugin.
 
 | Tier | Plugin | Source | MITM |
 | --- | --- | --- | --- |
-| Core | `Sub-Store.plugin` | This repository | `sub.store` only |
+| Core | Sub-Store | Official Sub-Store Loon plugin | `sub.store` only |
+| Core | Sub-Store Parser | Official Sub-Store Loon parser plugin | No MITM |
 | Recommended | Advertising rewrite | `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Loon/Advertising/Advertising.plugin` | Required for URL rules |
 | Recommended | Redirect cleanup | `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Loon/Redirect/Redirect.plugin` | Check upstream hosts |
 | Experimental | `YouTube-AdBlock.plugin` | This repository | `youtubei.googleapis.com` |
