@@ -17,7 +17,9 @@ are kept out of the base profile. Install Sub-Store and optional rewrite plugins
 from `Plugins/README.md` after creating and trusting Loon's local MITM
 certificate.
 
-The base profile includes an `Emby` policy group and routing rules. Optional
-Spotify, YouTube, and BiliBili response plugins are listed in
-`Plugins/README.md`; enable them one at a time after trusting Loon's MITM
-certificate and checking the affected app.
+Sub-Store is now included in the base profile's `[Plugin]` section, so it is
+visible immediately in Loon after importing `Loon.conf`. Generate and trust
+Loon's MITM certificate, then open `https://sub.store` to manage subscriptions
+and production. The profile also lists advertising, redirect, Spotify, YouTube,
+BiliBili, and legacy Emby plugins as disabled opt-ins; enable one at a time
+after checking the affected app.

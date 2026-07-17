@@ -2,6 +2,7 @@
 sub-store-core|https://github.com/sub-store-org/Sub-Store/releases/download/{{SUB_STORE_VERSION}}/sub-store-1.min.js|core|QuantumultX,Surge,Loon
 sub-store-simple|https://github.com/sub-store-org/Sub-Store/releases/download/{{SUB_STORE_VERSION}}/sub-store-0.min.js|core|QuantumultX,Surge,Loon
 sub-store-cron|https://github.com/sub-store-org/Sub-Store/releases/download/{{SUB_STORE_VERSION}}/cron-sync-artifacts.min.js|core|Surge,Loon
+sub-store-loon-parser|https://github.com/sub-store-org/Sub-Store/releases/download/{{SUB_STORE_VERSION}}/sub-store-parser.loon.min.js|core|Loon
 surge-advertising-rewrite|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Surge/Advertising/Advertising.sgmodule|recommended|Surge
 surge-redirect-rewrite|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Surge/Redirect/Redirect.sgmodule|recommended|Surge
 loon-advertising-rewrite|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Loon/Advertising/Advertising.plugin|recommended|Loon

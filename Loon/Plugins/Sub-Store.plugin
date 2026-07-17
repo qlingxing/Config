@@ -9,7 +9,7 @@ sync_success_notify=switch, true, tag=Sync Notification, desc=Notify when synchr
 cors=input, "https://sub-store.vercel.app,http://substore.stash,https://substore.stash", tag=CORS Origins, desc=Allowed web origins; do not use *
 
 [Rule]
-DOMAIN,sub-store.vercel.app,PROXY
+DOMAIN,sub-store.vercel.app,Proxy
 
 [MITM]
 hostname=sub.store

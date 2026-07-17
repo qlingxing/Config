@@ -27,7 +27,6 @@ for relative_path in $generated_files; do
 done
 
 for relative_path in \
-  source/quantumultx/qlingxing.conf \
   source/quantumultx/Sub-Store.conf \
   source/loon/Sub-Store.plugin \
   source/surge/Sub-Store.sgmodule \
@@ -37,6 +36,11 @@ for relative_path in \
     failed=1
   fi
 done
+
+if ! rg -q 'QuantumultX/Modules/Sub-Store\.conf,tag=Sub-Store' "$ROOT/QuantumultX/qlingxing.conf"; then
+  printf 'FAIL Quantumult X is missing its named Sub-Store module entry\n' >&2
+  failed=1
+fi
 
 versions=$(rg -o 'releases/download/[0-9]+\.[0-9]+\.[0-9]+' \
   "$ROOT/QuantumultX/qlingxing.conf" \

@@ -1,7 +1,9 @@
 # Loon Plugins
 
-Install plugins from the Loon Plugins screen. Plugins are independent from the
-base profile, so only enable the features you need.
+Sub-Store is loaded by the base profile and is visible in Loon's Plugins screen
+immediately after importing `Loon.conf`. The other entries are listed in that
+same screen as disabled opt-ins. Generate and trust Loon's MITM certificate
+before enabling a rewrite or response plugin.
 
 | Tier | Plugin | Source | MITM |
 | --- | --- | --- | --- |

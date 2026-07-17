@@ -6,7 +6,7 @@ using any rewrite that requires it.
 
 | Tier | Module | State | Notes |
 | --- | --- | --- | --- |
-| Core | Sub-Store | Built into base profile | Version is generated from `source/versions.json`; standalone module remains optional |
+| Core | Sub-Store | Enabled named remote module | Visible in QX's rewrite list; version is generated from `source/versions.json` |
 | Core | Resource Parser | Enabled | Local fallback for subscription conversion |
 | Recommended | YouTube advertising rewrite | Enabled | Requires the upstream rewrite's MITM hosts |
 | Recommended | Advertising rewrite | Enabled | App and web advertising cleanup; some URL rules need MITM |
@@ -19,3 +19,8 @@ using any rewrite that requires it.
 Use the client UI to enable an experimental item only after reviewing its
 upstream source and MITM hostname list. Do not add certificate material,
 subscription URLs, or account tokens to this repository.
+
+After importing the base profile, generate and trust the QX MITM certificate,
+then open `https://sub.store` while QX is running. Add provider subscriptions
+inside Sub-Store or add raw subscriptions under `[server_remote]` in the local
+copy of the profile.

@@ -10,7 +10,7 @@
       "tier": "core",
       "purpose": "subscription management, synchronization, and production",
       "clients": {
-        "quantumultX": "built into QuantumultX/qlingxing.conf",
+        "quantumultX": "named remote module in QuantumultX/qlingxing.conf",
         "surge": "Surge/Module/Surge.sgmodule",
         "loon": "Loon/Plugins/Sub-Store.plugin"
       },
