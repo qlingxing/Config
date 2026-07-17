@@ -11,9 +11,7 @@ sync_success_notify=switch, true, tag=Sync Notification, desc=Notify when synchr
 cors=input, "https://sub-store.vercel.app,http://substore.stash,https://substore.stash", tag=CORS Origins, desc=Allowed web origins; do not use *
 
 [Rule]
-# Use the profile's dedicated selector so the frontend can use a working route
-# while the plugin itself remains downloadable over DIRECT during bootstrap.
-DOMAIN,sub-store.vercel.app,Sub-Store
+DOMAIN,sub-store.vercel.app,PROXY
 
 [MITM]
 hostname=sub.store
