@@ -6,7 +6,7 @@ using any rewrite that requires it.
 
 | Tier | Module | State | Notes |
 | --- | --- | --- | --- |
-| Core | Sub-Store | Enabled named remote module | Visible in QX's rewrite list; uses official release-branch assets |
+| Core | Sub-Store | Enabled named remote module | Visible in QX's rewrite list; version is generated from `source/versions.json` |
 | Core | Resource Parser | Enabled | Local fallback for subscription conversion |
 | Recommended | YouTube advertising rewrite | Enabled | Requires the upstream rewrite's MITM hosts |
 | Recommended | Advertising rewrite | Enabled | App and web advertising cleanup; some URL rules need MITM |

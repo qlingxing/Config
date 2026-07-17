@@ -27,6 +27,7 @@ for relative_path in $generated_files; do
 done
 
 for relative_path in \
+  source/quantumultx/Sub-Store.conf \
   source/surge/Sub-Store.sgmodule \
   source/remote-resources.txt; do
   if ! rg -q '\{\{SUB_STORE_VERSION\}\}' "$ROOT/$relative_path"; then

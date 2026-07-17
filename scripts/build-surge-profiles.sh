@@ -71,7 +71,6 @@ build_copy() {
 
 build_copy "$ROOT/source/quantumultx/qlingxing.conf" "$ROOT/QuantumultX/qlingxing.conf"
 build_copy "$ROOT/source/quantumultx/Sub-Store.conf" "$ROOT/QuantumultX/Modules/Sub-Store.conf"
-build_copy "$ROOT/source/quantumultx/Sub-Store.list" "$ROOT/QuantumultX/Rules/Sub-Store.list"
 build_copy "$ROOT/source/loon/Loon.conf" "$ROOT/Loon/Loon.conf"
 build_copy "$ROOT/source/loon/Sub-Store.plugin" "$ROOT/Loon/Plugins/Sub-Store.plugin"
 build_copy "$ROOT/source/loon/Sub-Store-Parser.plugin" "$ROOT/Loon/Plugins/Sub-Store-Parser.plugin"
