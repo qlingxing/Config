@@ -116,6 +116,10 @@ function validateSurge(relativePath) {
     console.error(`FAIL ${relativePath} is missing All Nodes`);
     failed = true;
   }
+  if (!/^All Nodes\s*=\s*select,\s*DIRECT(?:,|$)/m.test(content)) {
+    console.error(`FAIL ${relativePath} must keep DIRECT in All Nodes for an empty-node import`);
+    failed = true;
+  }
 }
 
 function validateLoon() {
