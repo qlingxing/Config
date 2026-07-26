@@ -96,7 +96,8 @@ function section(content, start, end) {
 
 function validateSurge(relativePath) {
   const content = fs.readFileSync(`${root}/${relativePath}`, 'utf8');
-  const allNodesGroup = relativePath === 'Surge/macOS/Surge-5.conf' ? '全部节点' : 'All Nodes';
+  const allNodesGroup = '全部节点';
+  const proxyGroup = '代理';
   const groups = new Set();
   for (const line of section(content, '[Proxy Group]', '[Rule]').split('\n')) {
     const match = line.match(/^([^#=]+?)\s*=\s*/);
@@ -117,9 +118,17 @@ function validateSurge(relativePath) {
     console.error(`FAIL ${relativePath} is missing ${allNodesGroup}`);
     failed = true;
   }
+  if (!groups.has(proxyGroup)) {
+    console.error(`FAIL ${relativePath} is missing ${proxyGroup}`);
+    failed = true;
+  }
   const escapedAllNodesGroup = allNodesGroup.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   if (!(new RegExp(`^${escapedAllNodesGroup}\\s*=\\s*select,\\s*DIRECT(?:,|$)`, 'm')).test(content)) {
     console.error(`FAIL ${relativePath} must keep DIRECT in ${allNodesGroup} for an empty-node import`);
+    failed = true;
+  }
+  if (!/^代理\s*=\s*select,\s*DIRECT(?:,|$)/m.test(content)) {
+    console.error(`FAIL ${relativePath} must default 代理 to DIRECT before setup`);
     failed = true;
   }
 }
@@ -148,8 +157,16 @@ function validateLoon() {
       failed = true;
     }
   }
-  if (!groups.has('All Nodes')) {
-    console.error(`FAIL ${relativePath} is missing All Nodes`);
+  if (!groups.has('全部节点') || !groups.has('代理')) {
+    console.error(`FAIL ${relativePath} is missing 全部节点 or 代理`);
+    failed = true;
+  }
+  if (!/^全部节点\s*=\s*select,\s*DIRECT(?:,|$)/m.test(content)) {
+    console.error(`FAIL ${relativePath} must use DIRECT when no nodes are available`);
+    failed = true;
+  }
+  if (!/^代理\s*=\s*select,\s*DIRECT(?:,|$)/m.test(content)) {
+    console.error(`FAIL ${relativePath} must default 代理 to DIRECT before setup`);
     failed = true;
   }
 }
@@ -178,8 +195,16 @@ function validateQuantumultX() {
       failed = true;
     }
   }
-  if (!policies.has('All Nodes')) {
-    console.error(`FAIL ${relativePath} is missing All Nodes`);
+  if (!policies.has('全部节点') || !policies.has('代理')) {
+    console.error(`FAIL ${relativePath} is missing 全部节点 or 代理`);
+    failed = true;
+  }
+  if (!/^static=全部节点,\s*direct(?:,|$)/m.test(content)) {
+    console.error(`FAIL ${relativePath} must use direct when no nodes are available`);
+    failed = true;
+  }
+  if (!/^static=代理,\s*direct(?:,|$)/m.test(content)) {
+    console.error(`FAIL ${relativePath} must default 代理 to direct before setup`);
     failed = true;
   }
 }

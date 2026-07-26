@@ -2,12 +2,14 @@
 
 Use `Surge-5.conf` with Surge Mac 5.0 or newer. Use `Surge-6.conf` only with
 Surge Mac 6.0 or newer. Both profiles enable the Surge web dashboard and use
-the same routing and optional module set. The Mac 5 profile uses static
-selectors instead of dynamic node-name filtering; choose the desired node from
-each selector after adding nodes or a subscription. Its General section stays
-within the syntax verified by the existing Mac 5 configuration. Its base rules
-are local only; add remote rulesets or modules from Surge after the profile is
-imported.
+the same routing and optional module set. The Mac 5 profile uses the `smart`
+region-group syntax already verified by the prior Mac 5 profile. Its General
+section stays within the syntax verified by the existing Mac 5 configuration.
+Its base rules are local only; add remote rulesets or modules from Surge after
+the profile is imported. Before Sub-Store produces a node, the profile remains
+usable with `DIRECT`. Select a node only in `代理`; all service policies follow
+it by default. Select `REJECT` in that group when strict no-direct behavior is
+required.
 
 See `../README.md` for manual-node and subscription setup.
 

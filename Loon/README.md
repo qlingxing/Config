@@ -6,16 +6,18 @@ repository; use `../Surge/macOS/Surge-6.conf` on a Mac with Surge 6.
 The profile supports two node inputs at once:
 
 1. Add or paste individual nodes in Loon's Proxy screen. They are stored in
-   `[Proxy]` and are included by `All Nodes`, `Auto`, and the regional groups.
+   `[Proxy]` and are included by `全部节点`, `自动选择`, and the regional groups.
 2. Add a provider subscription in Loon's Remote Proxy screen, or replace the
    commented `[Remote Proxy]` sample with a local subscription URL.
 
-Both sources are collected by the same policy groups. `All Nodes` is the
-fallback selector when a node does not use a country tag. Keep subscription
-URLs, node credentials, and account tokens out of Git. MITM and rewrite modules
-are kept out of the base profile. Install Sub-Store and optional rewrite plugins
-from `Plugins/README.md` after creating and trusting Loon's local MITM
-certificate.
+Both sources are collected by the same policy groups. Select the desired node
+once in `代理`; service policies inherit it by default, while retaining regional
+overrides. `全部节点` and `代理` default to `DIRECT` until nodes are configured;
+select `REJECT` in `代理` when strict no-direct behavior is needed. Keep
+subscription URLs, node credentials, and account tokens out of Git. MITM and
+rewrite modules are kept out of the base profile. Install Sub-Store and optional
+rewrite plugins from `Plugins/README.md` after creating and trusting Loon's
+local MITM certificate.
 
 The base profile downloads Sub-Store's official Loon plugin directly, which is
 visible immediately after importing `Loon.conf` on networks that can reach

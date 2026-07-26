@@ -18,7 +18,7 @@ subscriptions.
 
 ## Surge
 
-In the imported platform profile, add manual nodes in `[Proxy]`. Replace the
-inert `Subscription = select, REJECT` group with the `policy-path` line shown
-in `Surge/README.md`. The profile collects both sources in `Auto` and the
-regional groups.
+In the imported platform profile, add manual nodes in `[Proxy]`. For Surge Mac
+5, replace the `policy-path` value in `全部节点`; for Surge Mac 6 and iOS, replace
+the `节点订阅` group with the subscription line shown in `Surge/README.md`. The
+profile collects both sources in `自动选择` and the regional groups.
