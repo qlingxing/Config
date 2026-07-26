@@ -96,6 +96,7 @@ function section(content, start, end) {
 
 function validateSurge(relativePath) {
   const content = fs.readFileSync(`${root}/${relativePath}`, 'utf8');
+  const allNodesGroup = relativePath === 'Surge/macOS/Surge-5.conf' ? '全部节点' : 'All Nodes';
   const groups = new Set();
   for (const line of section(content, '[Proxy Group]', '[Rule]').split('\n')) {
     const match = line.match(/^([^#=]+?)\s*=\s*/);
@@ -112,12 +113,13 @@ function validateSurge(relativePath) {
       failed = true;
     }
   }
-  if (!groups.has('All Nodes')) {
-    console.error(`FAIL ${relativePath} is missing All Nodes`);
+  if (!groups.has(allNodesGroup)) {
+    console.error(`FAIL ${relativePath} is missing ${allNodesGroup}`);
     failed = true;
   }
-  if (!/^All Nodes\s*=\s*select,\s*DIRECT(?:,|$)/m.test(content)) {
-    console.error(`FAIL ${relativePath} must keep DIRECT in All Nodes for an empty-node import`);
+  const escapedAllNodesGroup = allNodesGroup.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  if (!(new RegExp(`^${escapedAllNodesGroup}\\s*=\\s*select,\\s*DIRECT(?:,|$)`, 'm')).test(content)) {
+    console.error(`FAIL ${relativePath} must keep DIRECT in ${allNodesGroup} for an empty-node import`);
     failed = true;
   }
 }

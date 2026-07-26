@@ -11,11 +11,15 @@ imported.
 
 See `../README.md` for manual-node and subscription setup.
 
-If Surge reports a generic parsing error for `Surge-5.conf`, import
-`Surge-5-Diagnostic.conf` first. It contains only Mac 5 baseline syntax and no
-remote resources; do not use it as a daily profile.
+Install modules from Surge's Modules screen after importing the profile. The
+main configuration cannot install modules automatically.
 
-If that file imports successfully but `Surge-5.conf` does not, import these two
-diagnostic files in order: `Surge-5-General-Diagnostic.conf`, then
-`Surge-5-Group-Diagnostic.conf`. This isolates the General settings from the
-static policy-group definitions.
+| Module | URL |
+| --- | --- |
+| Sub-Store | `https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Surge.sgmodule` |
+| Advertising rewrite | `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Surge/Advertising/Advertising.sgmodule` |
+| Redirect cleanup | `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Surge/Redirect/Redirect.sgmodule` |
+| YouTube enhancement | `https://raw.githubusercontent.com/qlingxing/Config/refs/heads/main/Surge/Module/YouTube.Enhance.sgmodule` |
+| Spotify experimental | `https://raw.githubusercontent.com/qlingxing/Config/refs/heads/main/Surge/Module/spotify.module` |
+| BiliBili experimental | `https://raw.githubusercontent.com/qlingxing/Config/refs/heads/main/Surge/Modules/BiliBili-AdBlock.sgmodule` |
+| Emby public-service experimental | `https://raw.githubusercontent.com/qlingxing/Config/refs/heads/main/Surge/Modules/Emby-Public-Experimental.sgmodule` |

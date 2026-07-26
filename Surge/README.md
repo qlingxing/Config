@@ -18,11 +18,11 @@ The previous files under `Conf/` are frozen legacy configurations.
 2. Add manual nodes in `[Proxy]` or in Surge's Proxies screen. They appear in
    `All Nodes`, `Auto`, and every regional policy group.
 3. To add a subscription, append the local URL to the node group. On Surge Mac
-   5, edit `All Nodes`; on Surge Mac 6 and iOS, replace the inert
+   5, edit `全部节点`; on Surge Mac 6 and iOS, replace the inert
    `Subscription` group:
 
    ```ini
-   All Nodes = select, include-all-proxies=true, policy-path=https://example.com/subscription, update-interval=86400
+   全部节点 = select, DIRECT, include-all-proxies=true, policy-path=https://example.com/subscription, update-interval=86400
    ```
 
    For Mac 6 and iOS, use
@@ -36,9 +36,10 @@ The previous files under `Conf/` are frozen legacy configurations.
    management or production. Modules requiring MITM need a locally generated
    and trusted Surge certificate.
 
-The base profile includes an `Emby` policy group and routing rules. Response
-modules for Spotify and BiliBili remain experimental opt-ins because they alter
-application responses and require MITM.
+The Mac 6 and iOS profiles include an `Emby` policy group and routing rules.
+The Mac 5 profile retains the compatible selector but starts with local-only
+rules. Response modules for Spotify and BiliBili remain experimental opt-ins
+because they alter application responses and require MITM.
 
 `macOS/Surge-5.conf` deliberately starts without URL-backed rulesets because
 some Mac 5 builds fail generic profile parsing while loading them. Add a remote

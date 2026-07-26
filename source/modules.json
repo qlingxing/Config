@@ -56,7 +56,7 @@
       "purpose": "route known Emby service domains to a selectable proxy policy",
       "clients": {
         "quantumultX": "enabled in QuantumultX/qlingxing.conf",
-        "surge": "enabled in Surge/macOS/Surge-5.conf, Surge/macOS/Surge-6.conf, and Surge/iOS/Surge-6.conf",
+        "surge": "routing enabled in Surge/macOS/Surge-6.conf and Surge/iOS/Surge-6.conf; selector only in the local-rule Surge/macOS/Surge-5.conf",
         "loon": "enabled in Loon/Loon.conf"
       },
       "mitm": []
