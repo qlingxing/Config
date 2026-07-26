@@ -40,6 +40,11 @@ The base profile includes an `Emby` policy group and routing rules. Response
 modules for Spotify and BiliBili remain experimental opt-ins because they alter
 application responses and require MITM.
 
+`macOS/Surge-5.conf` deliberately starts without URL-backed rulesets because
+some Mac 5 builds fail generic profile parsing while loading them. Add a remote
+ruleset from Surge after importing the profile if service-specific routing is
+required.
+
 ## Compatibility Model
 
 The platform profiles are generated from `../source/surge/`. Run
