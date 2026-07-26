@@ -2,8 +2,9 @@
 
 Use `Surge-5.conf` with Surge Mac 5.0 or newer. Use `Surge-6.conf` only with
 Surge Mac 6.0 or newer. Both profiles enable the Surge web dashboard and use
-the same routing and optional module set; the Mac 5 profile excludes Mac 6-only
-general settings and uses conservative policy-group syntax for older 5.x builds.
+the same routing and optional module set. The Mac 5 profile uses static
+selectors instead of dynamic node-name filtering; choose the desired node from
+each selector after adding nodes or a subscription.
 
 See `../README.md` for manual-node and subscription setup.
 
