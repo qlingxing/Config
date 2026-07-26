@@ -75,6 +75,8 @@ build_copy() {
 build_copy "$ROOT/source/quantumultx/qlingxing.conf" "$ROOT/QuantumultX/qlingxing.conf"
 build_copy "$ROOT/source/loon/Loon.conf" "$ROOT/Loon/Loon.conf"
 build_copy "$ROOT/source/surge/macos5-diagnostic.conf" "$ROOT/Surge/macOS/Surge-5-Diagnostic.conf"
+build_copy "$ROOT/source/surge/macos5-general-diagnostic.conf" "$ROOT/Surge/macOS/Surge-5-General-Diagnostic.conf"
+build_copy "$ROOT/source/surge/macos5-group-diagnostic.conf" "$ROOT/Surge/macOS/Surge-5-Group-Diagnostic.conf"
 build_copy "$ROOT/source/surge/Sub-Store.sgmodule" "$ROOT/Surge/Module/Surge.sgmodule"
 build_copy "$ROOT/source/surge/Spotify.module" "$ROOT/Surge/Module/spotify.module"
 build_copy "$ROOT/source/surge/BiliBili-AdBlock.sgmodule" "$ROOT/Surge/Modules/BiliBili-AdBlock.sgmodule"
