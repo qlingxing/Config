@@ -17,21 +17,18 @@ The previous files under `Conf/` are frozen legacy configurations.
 1. Import the profile for the device platform as a normal profile.
 2. Add manual nodes in `[Proxy]` or in Surge's Proxies screen. They appear in
    `All Nodes`, `Auto`, and every regional policy group.
-3. To add a subscription, replace this inert line in `[Proxy Group]`:
+3. To add a subscription, append the local URL to the node group. On Surge Mac
+   5, edit `All Nodes`; on Surge Mac 6 and iOS, replace the inert
+   `Subscription` group:
 
    ```ini
-   Subscription = select, REJECT
+   All Nodes = select, include-all-proxies=true, policy-path=https://example.com/subscription, update-interval=86400
    ```
 
-   with your local subscription URL:
-
-   ```ini
-   Subscription = select, policy-path=https://example.com/subscription, update-interval=86400, hidden=true
-   ```
-
+   For Mac 6 and iOS, use
+   `Subscription = select, policy-path=https://example.com/subscription, update-interval=86400, hidden=true`.
    Subscription nodes and manual nodes are collected together by `All Nodes`,
-   `Auto`, and the regional groups. Keep the actual URL only in your local
-   copy.
+   `Auto`, and the regional groups. Keep the actual URL only in your local copy.
 4. Select a default policy from `Proxy`, then use regional and service groups
    only when a service needs a specific exit region.
 5. Open the Modules screen and opt into the modules documented in

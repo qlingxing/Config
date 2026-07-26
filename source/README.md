@@ -4,7 +4,8 @@ This directory contains the maintained inputs rather than client-imported
 artifacts.
 
 - `surge/`: common routing and platform-specific General sections used to build
-  the Surge Mac 5, Surge Mac 6, and Surge iOS profiles.
+  the Surge Mac 5, Surge Mac 6, and Surge iOS profiles. `macos5.routing.conf`
+  intentionally keeps to the established Mac 5 policy-group syntax.
 - `quantumultx/` and `loon/`: native source profiles copied to their client
   import paths by the build script.
 - `versions.json`: the single release version used by generated Sub-Store

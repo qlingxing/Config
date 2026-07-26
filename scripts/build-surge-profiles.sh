@@ -39,7 +39,7 @@ render_template() {
 build_profile() {
   general_source=$1
   target_relative_path=$2
-  profile_generation=$3
+  routing_source=$3
   title=$4
   target="$ROOT/Surge/$target_relative_path"
   temporary="$target.tmp"
@@ -53,30 +53,15 @@ build_profile() {
     printf '\n'
     render_template "$SOURCE/$general_source"
     printf '\n'
-    case "$profile_generation" in
-      macos5)
-        render_template "$SOURCE/routing.conf" |
-          sed \
-            -e '/^RULE-SET,SYSTEM,DIRECT$/d' \
-            -e 's/, evaluate-before-use=true//' \
-            -e 's/policy-regex-filter=(?i)/policy-regex-filter=/'
-        ;;
-      standard)
-        render_template "$SOURCE/routing.conf"
-        ;;
-      *)
-        printf 'Unknown Surge profile generation: %s\n' "$profile_generation" >&2
-        exit 1
-        ;;
-    esac
+    render_template "$SOURCE/$routing_source"
   } > "$temporary"
 
   mv "$temporary" "$target"
 }
 
-build_profile macos5.general.conf macOS/Surge-5.conf macos5 'Surge Mac 5.0+ base profile'
-build_profile macos.general.conf macOS/Surge-6.conf standard 'Surge Mac 6.0+ base profile'
-build_profile ios.general.conf iOS/Surge-6.conf standard 'Surge iOS and iPadOS base profile'
+build_profile macos5.general.conf macOS/Surge-5.conf macos5.routing.conf 'Surge Mac 5.0+ base profile'
+build_profile macos.general.conf macOS/Surge-6.conf routing.conf 'Surge Mac 6.0+ base profile'
+build_profile ios.general.conf iOS/Surge-6.conf routing.conf 'Surge iOS and iPadOS base profile'
 
 build_copy() {
   source=$1
