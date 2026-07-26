@@ -82,6 +82,10 @@ checkRegion('taiwan', ['TW-01', 'Taiwan 01', '台湾 01'], ['Network TWX']);
 
 const builtins = new Set(['DIRECT', 'REJECT', 'REJECT-DROP', 'direct', 'reject', 'proxy']);
 
+function normalizePolicy(value) {
+  return value.trim().replace(/^"(.*)"$/, '$1');
+}
+
 function section(content, start, end) {
   const startIndex = content.indexOf(start);
   if (startIndex < 0) throw new Error(`missing section ${start}`);
@@ -99,8 +103,8 @@ function validateSurge(relativePath) {
   }
   const targets = [];
   for (const line of section(content, '[Rule]').split('\n')) {
-    if (/^(RULE-SET|DOMAIN|DOMAIN-SUFFIX|IP-CIDR),/.test(line)) targets.push(line.split(',')[2]);
-    if (/^FINAL,/.test(line)) targets.push(line.split(',')[1]);
+    if (/^(RULE-SET|DOMAIN|DOMAIN-SUFFIX|IP-CIDR),/.test(line)) targets.push(normalizePolicy(line.split(',')[2]));
+    if (/^FINAL,/.test(line)) targets.push(normalizePolicy(line.split(',')[1]));
   }
   for (const target of targets) {
     if (target && !groups.has(target) && !builtins.has(target)) {
