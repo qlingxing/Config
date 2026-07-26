@@ -15,8 +15,10 @@ REGION_UNITED_KINGDOM=$(jq -er '.unitedKingdom' "$REGION_FILE")
 REGION_TAIWAN=$(jq -er '.taiwan' "$REGION_FILE")
 
 render_template() {
+  sub_store_target=$2
   awk \
     -v sub_store_version="$SUB_STORE_VERSION" \
+    -v sub_store_target="$sub_store_target" \
     -v region_hong_kong="$REGION_HONG_KONG" \
     -v region_japan="$REGION_JAPAN" \
     -v region_singapore="$REGION_SINGAPORE" \
@@ -25,6 +27,7 @@ render_template() {
     -v region_taiwan="$REGION_TAIWAN" '
       {
         gsub(/\{\{SUB_STORE_VERSION\}\}/, sub_store_version)
+        gsub(/\{\{SUB_STORE_TARGET\}\}/, sub_store_target)
         gsub(/\{\{REGION_HONG_KONG\}\}/, region_hong_kong)
         gsub(/\{\{REGION_JAPAN\}\}/, region_japan)
         gsub(/\{\{REGION_SINGAPORE\}\}/, region_singapore)
@@ -40,7 +43,8 @@ build_profile() {
   general_source=$1
   target_relative_path=$2
   routing_source=$3
-  title=$4
+  sub_store_target=$4
+  title=$5
   target="$ROOT/Surge/$target_relative_path"
   temporary="$target.tmp"
 
@@ -51,24 +55,24 @@ build_profile() {
     printf '%s\n' "# $title"
     printf '%s\n' '# Keep device-specific nodes and subscription URLs in the imported local copy.'
     printf '\n'
-    render_template "$SOURCE/$general_source"
+    render_template "$SOURCE/$general_source" "$sub_store_target"
     printf '\n'
-    render_template "$SOURCE/$routing_source"
+    render_template "$SOURCE/$routing_source" "$sub_store_target"
   } > "$temporary"
 
   mv "$temporary" "$target"
 }
 
-build_profile macos5.general.conf macOS/Surge-5.conf macos5.routing.conf 'Surge Mac 5.0+ base profile'
-build_profile macos.general.conf macOS/Surge-6.conf routing.conf 'Surge Mac 6.0+ base profile'
-build_profile ios.general.conf iOS/Surge-6.conf routing.conf 'Surge iOS and iPadOS base profile'
+build_profile macos5.general.conf macOS/Surge-5.conf macos5.routing.conf SurgeMac 'Surge Mac 5.0+ base profile'
+build_profile macos.general.conf macOS/Surge-6.conf routing.conf SurgeMac 'Surge Mac 6.0+ base profile'
+build_profile ios.general.conf iOS/Surge-6.conf routing.conf Surge 'Surge iOS and iPadOS base profile'
 
 build_copy() {
   source=$1
   target=$2
   temporary="$target.tmp"
   mkdir -p "$(dirname "$target")"
-  render_template "$source" > "$temporary"
+  render_template "$source" '' > "$temporary"
   mv "$temporary" "$target"
 }
 

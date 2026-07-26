@@ -24,8 +24,10 @@ directly in the corresponding client:
 | Loon | `https://raw.githubusercontent.com/qlingxing/Config/main/Loon/Loon.conf` |
 | Quantumult X | `https://raw.githubusercontent.com/qlingxing/Config/main/QuantumultX/qlingxing.conf` |
 
-These base profiles intentionally contain no provider URL or node credential.
-Add subscriptions and manual nodes locally after import; see `local/README.md`.
+These profiles contain an active local Sub-Store `All` product URL but no
+provider URL or node credential. Enable the official Sub-Store integration
+before import, then add provider subscriptions and manual nodes locally; see
+`local/README.md`.
 
 ## Design
 

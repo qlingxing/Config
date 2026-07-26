@@ -32,7 +32,7 @@ if ! xargs -n 1 -P 8 sh -c '
   url=$2
 
   case "$url" in
-    *dns-query|*generate_204|https://sub-store.vercel.app|http://substore.stash|https://substore.stash)
+    *dns-query|*generate_204|https://sub.store/*|https://sub-store.vercel.app|http://substore.stash|https://substore.stash)
       printf "SKIP endpoint %s\\n" "$url"
       exit 0
       ;;
