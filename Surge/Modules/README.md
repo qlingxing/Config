@@ -7,7 +7,7 @@ available in the main profile.
 
 | Tier | Module | Platform | MITM | Purpose |
 | --- | --- | --- | --- |
-| Core | `../Module/Surge.sgmodule` | iOS, macOS | `sub.store` only | Sub-Store subscription management |
+| Core | `https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Surge.sgmodule` | iOS, macOS | `sub.store` only | Official Sub-Store subscription management |
 | Recommended | `AdBlock.sgmodule` | iOS, macOS | Optional | Domain rules work without MITM; URL rules need it |
 | Recommended | `../Module/YouTube.Enhance.sgmodule` | iOS, macOS | Yes | YouTube interface enhancement |
 | Recommended | `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Surge/Advertising/Advertising.sgmodule` | iOS, macOS | Required for URL rules | Advertising rewrite |
@@ -25,3 +25,6 @@ entitlement. Emby routing is included in the base profile, but no generic Emby
 unlock module is shipped because service-side behavior is server-specific. The
 legacy Emby experimental module applies only to `mb3admin.com`, never to a
 self-hosted server.
+
+The repository copy at `../Module/Surge.sgmodule` is retained for release
+validation. For normal installation, use the official Sub-Store URL above.

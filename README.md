@@ -4,6 +4,7 @@ Personal routing configurations for Quantumult X, Surge, and Loon.
 
 | Client | Entry | Platform | Support status |
 | --- | --- | --- | --- |
+| Surge | `Surge/macOS/Surge-5.conf` | macOS | Maintained: Surge Mac 5.0+ |
 | Surge | `Surge/macOS/Surge-6.conf` | macOS | Maintained: Surge Mac 6.0+ |
 | Surge | `Surge/iOS/Surge-6.conf` | iOS, iPadOS | Maintained: current Surge iOS |
 | Loon | `Loon/Loon.conf` | iOS, iPadOS | Maintained base profile |
@@ -17,7 +18,8 @@ directly in the corresponding client:
 
 | Client | Direct import URL |
 | --- | --- |
-| Surge for macOS | `https://raw.githubusercontent.com/qlingxing/Config/main/Surge/macOS/Surge-6.conf` |
+| Surge for macOS 5 | `https://raw.githubusercontent.com/qlingxing/Config/main/Surge/macOS/Surge-5.conf` |
+| Surge for macOS 6+ | `https://raw.githubusercontent.com/qlingxing/Config/main/Surge/macOS/Surge-6.conf` |
 | Surge for iOS/iPadOS | `https://raw.githubusercontent.com/qlingxing/Config/main/Surge/iOS/Surge-6.conf` |
 | Loon | `https://raw.githubusercontent.com/qlingxing/Config/main/Loon/Loon.conf` |
 | Quantumult X | `https://raw.githubusercontent.com/qlingxing/Config/main/QuantumultX/qlingxing.conf` |

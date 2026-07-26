@@ -4,14 +4,13 @@
 
 | Platform | Profile | Supported baseline |
 | --- | --- | --- |
+| macOS | `macOS/Surge-5.conf` | Surge Mac 5.0+ |
 | macOS | `macOS/Surge-6.conf` | Surge Mac 6.0+ |
 | iOS/iPadOS | `iOS/Surge-6.conf` | Current Surge iOS |
 
-Surge 4 and old Surge 5 builds are not supported targets.
-
-The previous file at `Conf/Surge.conf` is retained as a frozen legacy Surge 5
-profile. Do not add features to it; migrate to the platform-specific Surge 6
-profile instead.
+Surge 4 is not a supported target. `macOS/Surge-5.conf` avoids the Mac 6-only
+settings while keeping the same routing and module model as the newer profile.
+The previous files under `Conf/` are frozen legacy configurations.
 
 ## Import
 

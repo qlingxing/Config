@@ -37,9 +37,10 @@ render_template() {
 }
 
 build_profile() {
-  platform=$1
-  title=$2
-  target="$ROOT/Surge/$platform/Surge-6.conf"
+  general_source=$1
+  target_relative_path=$2
+  title=$3
+  target="$ROOT/Surge/$target_relative_path"
   temporary="$target.tmp"
 
   mkdir -p "$(dirname "$target")"
@@ -49,7 +50,7 @@ build_profile() {
     printf '%s\n' "# $title"
     printf '%s\n' '# Keep device-specific nodes and subscription URLs in the imported local copy.'
     printf '\n'
-    render_template "$SOURCE/$platform.general.conf"
+    render_template "$SOURCE/$general_source"
     printf '\n'
     render_template "$SOURCE/routing.conf"
   } > "$temporary"
@@ -57,8 +58,9 @@ build_profile() {
   mv "$temporary" "$target"
 }
 
-build_profile macOS 'Surge Mac 6.0+ base profile'
-build_profile iOS 'Surge iOS and iPadOS base profile'
+build_profile macos5.general.conf macOS/Surge-5.conf 'Surge Mac 5.0+ base profile'
+build_profile macos.general.conf macOS/Surge-6.conf 'Surge Mac 6.0+ base profile'
+build_profile ios.general.conf iOS/Surge-6.conf 'Surge iOS and iPadOS base profile'
 
 build_copy() {
   source=$1

@@ -8,6 +8,7 @@ VERSION=$(jq -er '.subStore' "$VERSION_FILE")
 
 generated_files='
   QuantumultX/qlingxing.conf
+  Surge/macOS/Surge-5.conf
   Surge/macOS/Surge-6.conf
   Surge/iOS/Surge-6.conf
   Surge/Module/Surge.sgmodule
@@ -174,6 +175,7 @@ function validateQuantumultX() {
 }
 
 try {
+  validateSurge('Surge/macOS/Surge-5.conf');
   validateSurge('Surge/macOS/Surge-6.conf');
   validateSurge('Surge/iOS/Surge-6.conf');
   validateLoon();

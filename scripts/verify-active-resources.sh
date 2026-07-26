@@ -7,6 +7,7 @@ trap 'rm -f "$TEMPORARY"' EXIT HUP INT TERM
 
 set -- \
   "$ROOT/QuantumultX/qlingxing.conf" \
+  "$ROOT/Surge/macOS/Surge-5.conf" \
   "$ROOT/Surge/macOS/Surge-6.conf" \
   "$ROOT/Surge/iOS/Surge-6.conf" \
   "$ROOT/Surge/Module/Surge.sgmodule" \
