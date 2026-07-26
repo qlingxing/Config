@@ -38,6 +38,9 @@ Add subscriptions and manual nodes locally after import; see `local/README.md`.
 - Surge 6 has dedicated macOS and iOS entry points. The routing model stays
   aligned; platform-specific settings are kept in the appropriate profile.
 
+Sub-Store product targets and official client integrations are listed in
+`docs/SUBSTORE.md`.
+
 ## Maintenance
 
 The maintained architecture is documented in `docs/ARCHITECTURE.md`.

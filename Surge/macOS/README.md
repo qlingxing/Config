@@ -11,8 +11,10 @@ imported.
 
 See `../README.md` for manual-node and subscription setup.
 
-Install modules from Surge's Modules screen after importing the profile. The
-main configuration cannot install modules automatically.
+Install Sub-Store from Surge's Modules screen before adding the production URL
+to `全部节点`. Use
+`https://sub.store/download/collection/All?target=SurgeMac` as its `policy-path`.
+The main configuration cannot install modules automatically.
 
 | Module | URL |
 | --- | --- |
