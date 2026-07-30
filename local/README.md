@@ -19,7 +19,8 @@ subscriptions.
 ## Surge
 
 Import the platform Raw URL as a managed profile. For manual nodes, use **Create
-Linked Profile**, link `[General]`, `[Proxy Group]`, and `[Rule]`, and leave
-`[Proxy]` local. Add nodes only to that local section. Keep provider URLs and
-tokens inside Sub-Store; the managed profile already references its local `All`
-collection and collects both Sub-Store and manual nodes in the regional groups.
+Linked Profile**, link `[General]`, `[Proxy Group]`, `[Rule]`, and `[Host]`, and
+leave `[Proxy]` and `[MITM]` local. Add nodes only to `[Proxy]`; generate and
+trust the certificate once in `[MITM]`. Keep provider URLs and tokens inside
+Sub-Store; the managed profile already references its local `All` collection
+and collects both Sub-Store and manual nodes in the regional groups.

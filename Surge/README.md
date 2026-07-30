@@ -21,16 +21,21 @@ The previous files under `Conf/` are frozen legacy configurations.
    every 24 hours while the Surge main app is running. `strict=false` allows the
    existing profile to continue working when GitHub is temporarily unavailable.
 3. To add manual nodes, select the managed base in the profile list and choose
-   **Create Linked Profile**. Link `[General]`, `[Proxy Group]`, and `[Rule]`,
-   but leave `[Proxy]` local. Add manual nodes to that local `[Proxy]` section;
-   the linked sections continue to synchronize with the managed base.
-4. Add provider subscriptions inside Sub-Store. The public profile contains
+   **Create Linked Profile**. Link `[General]`, `[Proxy Group]`, `[Rule]`, and
+   `[Host]`, but leave `[Proxy]` and `[MITM]` local. Add manual nodes to the
+   local `[Proxy]` section. Generate, install, and trust the MITM certificate
+   once in the local `[MITM]` section; managed updates will not replace it.
+4. Enable the official Sub-Store module, open `https://sub.store` in Safari,
+   and create a collection whose internal name is exactly `All`. Then update
+   the `节点订阅` external resource once. A parse warning before this setup is
+   expected because the local backend is not ready yet.
+5. Add provider subscriptions inside Sub-Store. The public profile contains
    only the local `All` collection product URL, never a provider URL or token.
    Sub-Store nodes and local `[Proxy]` nodes are collected by the same node pool
    and regional groups.
-5. Select a default policy from `代理`, then use regional and service groups
+6. Select a default policy from `代理`, then use regional and service groups
    only when a service needs a specific exit region.
-6. Open the Modules screen and opt into the modules documented in
+7. Open the Modules screen and opt into the modules documented in
    `Modules/README.md`. Install Sub-Store first when subscriptions need
    management or production. Modules requiring MITM need a locally generated
    and trusted Surge certificate.
@@ -53,4 +58,4 @@ URL-backed service routing. Its `smart` groups require Surge Mac 5.7 or newer.
 The platform profiles are generated from `../source/surge/`. Run
 `scripts/build-surge-profiles.sh` after changing the shared routing source. The
 generated files are self-updating managed profiles. Use a linked profile for
-local nodes instead of editing the managed base.
+local nodes and MITM certificates instead of editing the managed base.

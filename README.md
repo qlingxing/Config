@@ -26,8 +26,9 @@ directly in the corresponding client:
 
 The three Surge URLs are managed profiles. Surge checks them at most once per
 24 hours while the main app is running. Create a linked profile when local
-manual nodes are required: link `[General]`, `[Proxy Group]`, and `[Rule]`, but
-keep `[Proxy]` local so remote updates cannot overwrite device-specific nodes.
+manual nodes or MITM modules are required: link `[General]`, `[Proxy Group]`,
+`[Rule]`, and `[Host]`, but keep `[Proxy]` and `[MITM]` local so remote updates
+cannot overwrite device-specific nodes or certificates.
 
 These profiles contain an active local Sub-Store `All` product URL but no
 provider URL or node credential. Install the official Surge module before a

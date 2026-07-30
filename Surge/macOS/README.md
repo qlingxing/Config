@@ -4,10 +4,10 @@ Use `Surge-5.conf` with Surge Mac 5.7 or newer. Use `Surge-6.conf` only with
 Surge Mac 6.0 or newer. Both use the same routing and optional module set; the
 Mac 6 profile also enables the web dashboard. Both Raw entries are managed
 profiles. Create a linked profile and keep `[Proxy]` local when adding manual
-nodes. Before Sub-Store produces a node, the profile remains usable with
-`DIRECT`. Select a node only in `代理`; all service policies follow it by
-default. Select `REJECT` in that group when strict no-direct behavior is
-required.
+nodes; keep `[MITM]` local as well so managed updates preserve the certificate.
+Before Sub-Store produces a node, the profile remains usable with `DIRECT`.
+Select a node only in `代理`; all service policies follow it by default. Select
+`REJECT` in that group when strict no-direct behavior is required.
 
 See `../README.md` for manual-node and subscription setup.
 

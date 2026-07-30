@@ -121,6 +121,20 @@ function validateSurge(relativePath) {
       failed = true;
     }
   }
+  const hostSection = section(content, '[Host]', '[MITM]');
+  if (!/^sub\.store\s*=\s*127\.0\.0\.1\s*$/m.test(hostSection)) {
+    console.error(`FAIL ${relativePath} must keep sub.store mapped to localhost`);
+    failed = true;
+  }
+  const mitmSection = section(content, '[MITM]');
+  if (!/^h2\s*=\s*true\s*$/m.test(mitmSection)) {
+    console.error(`FAIL ${relativePath} must provide a local MITM section for linked profiles`);
+    failed = true;
+  }
+  if (/^ca-(?:p12|passphrase)\s*=/m.test(mitmSection)) {
+    console.error(`FAIL ${relativePath} must not contain a committed MITM certificate`);
+    failed = true;
+  }
   const targets = [];
   for (const line of section(content, '[Rule]').split('\n')) {
     if (/^(RULE-SET|DOMAIN|DOMAIN-SUFFIX|IP-CIDR),/.test(line)) targets.push(normalizePolicy(line.split(',')[2]));
