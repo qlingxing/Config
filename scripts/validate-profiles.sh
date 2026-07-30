@@ -108,6 +108,13 @@ function validateSurge(relativePath) {
     }
   }
   validateReferences(relativePath, groupReferences, groups);
+  for (const option of ['internet-test-url', 'proxy-test-url']) {
+    const testUrl = content.match(new RegExp(`^${option}\\s*=\\s*(\\S+)`, 'm'))?.[1];
+    if (testUrl && !testUrl.startsWith('http://')) {
+      console.error(`FAIL ${relativePath} ${option} must use plain HTTP for Surge import compatibility`);
+      failed = true;
+    }
+  }
   const targets = [];
   for (const line of section(content, '[Rule]').split('\n')) {
     if (/^(RULE-SET|DOMAIN|DOMAIN-SUFFIX|IP-CIDR),/.test(line)) targets.push(normalizePolicy(line.split(',')[2]));
