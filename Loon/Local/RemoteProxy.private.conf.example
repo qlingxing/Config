@@ -2,4 +2,4 @@
 # My Node = ss, server.example.com, 443, aes-256-gcm, CHANGE_ME
 
 [Remote Proxy]
-# https://example.com/subscription, tag=My Subscription, enabled=true
+# My Subscription = https://example.com/subscription

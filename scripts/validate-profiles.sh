@@ -183,6 +183,22 @@ function validateSurge(relativePath) {
 function validateLoon() {
   const relativePath = 'Loon/Loon.conf';
   const content = fs.readFileSync(`${root}/${relativePath}`, 'utf8');
+  const remoteProxies = section(content, '[Remote Proxy]', '[Proxy Group]');
+  if (!/^Sub-Store All\s*=\s*https:\/\/sub\.store\/download\/collection\/All\?target=Loon\s*$/m.test(remoteProxies)) {
+    console.error(`FAIL ${relativePath} must use Loon's Name = URL syntax for the Sub-Store remote proxy`);
+    failed = true;
+  }
+  for (const line of remoteProxies.split('\n')) {
+    const value = line.trim();
+    if (!value || value.startsWith('#')) continue;
+    const separator = value.indexOf('=');
+    const name = separator < 0 ? '' : value.slice(0, separator).trim();
+    const url = separator < 0 ? '' : value.slice(separator + 1).trim();
+    if (!name || /^https?:\/\//.test(name) || !/^https?:\/\//.test(url)) {
+      console.error(`FAIL ${relativePath} has an invalid Remote Proxy entry: ${value}`);
+      failed = true;
+    }
+  }
   const groups = new Set();
   const groupReferences = [];
   for (const line of section(content, '[Proxy Group]', '[Remote Rule]').split('\n')) {

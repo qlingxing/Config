@@ -8,7 +8,7 @@ The profile supports two node inputs at once:
 1. Add or paste individual nodes in Loon's Proxy screen. They are stored in
    `[Proxy]` and are included by `全部节点`, `自动选择`, and the regional groups.
 2. Add a provider subscription in Loon's Remote Proxy screen, or replace the
-   commented `[Remote Proxy]` sample with a local subscription URL.
+   commented `[Remote Proxy]` sample using Loon's `Name = URL` syntax.
 
 Both sources are collected by the same policy groups. Select the desired node
 once in `代理`; service policies inherit it by default, while retaining regional
@@ -31,6 +31,9 @@ generic Emby unlock or directly maintained YouTube Loon plugin is advertised.
 On the first import, `Sub-Store All` can update before the plugin and local
 certificate are ready. After trusting the certificate and creating the `All`
 collection, update that remote proxy once from Loon's Remote Proxy screen.
+The profile entry must remain
+`Sub-Store All = https://sub.store/download/collection/All?target=Loon` so the
+query-string `=` is parsed as part of the URL rather than as the field separator.
 
 `sub.store` is a local rewrite endpoint rather than a public Sub-Store website.
 Keep the Sub-Store plugin enabled before opening that URL.
