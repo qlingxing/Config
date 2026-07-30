@@ -18,9 +18,9 @@ subscriptions.
 
 ## Surge
 
-Import the platform Raw URL as a managed profile. For manual nodes, use **Create
-Linked Profile**, link `[General]`, `[Proxy Group]`, `[Rule]`, and `[Host]`, and
-leave `[Proxy]` and `[MITM]` local. Add nodes only to `[Proxy]`; generate and
-trust the certificate once in `[MITM]`. Keep provider URLs and tokens inside
-Sub-Store; the managed profile already references its local `All` collection
-and collects both Sub-Store and manual nodes in the regional groups.
+Import the platform Raw URL as the managed source, then create an editable copy
+for daily use. Add manual nodes only to `[Proxy]`, and generate and trust the
+certificate in `[MITM]` in that copy. Keep provider URLs and tokens inside
+Sub-Store. Rulesets, the Sub-Store product, and modules update independently in
+the copy; create another copy only after the managed source profile itself has
+changed.

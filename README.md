@@ -24,17 +24,19 @@ directly in the corresponding client:
 | Loon | `https://raw.githubusercontent.com/qlingxing/Config/main/Loon/Loon.conf` |
 | Quantumult X | `https://raw.githubusercontent.com/qlingxing/Config/main/QuantumultX/qlingxing.conf` |
 
-The three Surge URLs are managed profiles. Surge checks them at most once per
-24 hours while the main app is running. Create a linked profile when local
-manual nodes or MITM modules are required: link `[General]`, `[Proxy Group]`,
-`[Rule]`, and `[Host]`, but keep `[Proxy]` and `[MITM]` local so remote updates
-cannot overwrite device-specific nodes or certificates.
+The three Surge URLs are managed source profiles and check for updates every 24
+hours while the main app is running. Keep the managed source in the profile
+list, then create an editable copy for the active configuration. The copy holds
+manual nodes and the locally generated MITM CA; it does not follow later source
+profile changes, so create a new copy only when the managed source itself has
+actually changed. Rulesets, Sub-Store products, and modules update independently
+inside the active copy.
 
 These profiles contain an active local Sub-Store `All` product URL but no
-provider URL or node credential. Install the official Surge module before a
-Surge profile; Loon and QX load their official integration during profile
-import. Then add provider subscriptions and manual nodes locally; see
-`local/README.md`.
+provider URL or node credential. Create the editable Surge copy, generate and
+trust its local CA, then enable the official Sub-Store module. Loon and QX load
+their official integration during profile import. Add provider subscriptions
+and manual nodes locally; see `local/README.md`.
 
 ## Design
 

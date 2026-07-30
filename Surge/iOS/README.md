@@ -1,9 +1,9 @@
 # Surge for iOS and iPadOS
 
 Import `Surge-6.conf` with the current Surge iOS release. The profile excludes
-macOS-only settings and keeps local Wi-Fi access disabled by default. It is a
-managed profile and checks for updates while the Surge main app is running.
-Create a linked profile and keep `[Proxy]` and `[MITM]` local when adding manual
-nodes or generating a certificate.
+macOS-only settings and keeps local Wi-Fi access disabled by default. Keep it as
+the managed update source and use an editable copy for the generated MITM CA and
+manual nodes. Remote rulesets, Sub-Store products, and modules update inside the
+copy without requiring another copy.
 
 See `../README.md` for manual-node and subscription setup.

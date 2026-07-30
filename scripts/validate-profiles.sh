@@ -128,7 +128,7 @@ function validateSurge(relativePath) {
   }
   const mitmSection = section(content, '[MITM]');
   if (!/^h2\s*=\s*true\s*$/m.test(mitmSection)) {
-    console.error(`FAIL ${relativePath} must provide a local MITM section for linked profiles`);
+    console.error(`FAIL ${relativePath} must provide an MITM section for editable copies`);
     failed = true;
   }
   if (/^ca-(?:p12|passphrase)\s*=/m.test(mitmSection)) {
