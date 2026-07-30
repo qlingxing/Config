@@ -10,10 +10,8 @@ set -- \
   "$ROOT/Surge/macOS/Surge-5.conf" \
   "$ROOT/Surge/macOS/Surge-6.conf" \
   "$ROOT/Surge/iOS/Surge-6.conf" \
-  "$ROOT/Surge/Module/Surge.sgmodule" \
-  "$ROOT/Surge/Module/spotify.module" \
-  "$ROOT/Surge/Modules/BiliBili-AdBlock.sgmodule" \
-  "$ROOT/Surge/Modules/Emby-Public-Experimental.sgmodule" \
+  "$ROOT/Surge/Modules/AdBlock.sgmodule" \
+  "$ROOT/Surge/Modules/Mac-Console-NAT.sgmodule" \
   "$ROOT/Loon/Loon.conf"
 
 awk '

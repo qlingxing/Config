@@ -1,14 +1,17 @@
 # name|url|tier|clients
-sub-store-core|https://github.com/sub-store-org/Sub-Store/releases/download/{{SUB_STORE_VERSION}}/sub-store-1.min.js|core|Surge
-sub-store-simple|https://github.com/sub-store-org/Sub-Store/releases/download/{{SUB_STORE_VERSION}}/sub-store-0.min.js|core|Surge
-sub-store-cron|https://github.com/sub-store-org/Sub-Store/releases/download/{{SUB_STORE_VERSION}}/cron-sync-artifacts.min.js|core|Surge
+sub-store-surge-module|https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Surge.sgmodule|core|Surge
 sub-store-qx-module|https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/QX.snippet|core|QuantumultX
 sub-store-loon-plugin|https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Loon.plugin|core|Loon
-surge-advertising-rewrite|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Surge/Advertising/Advertising.sgmodule|recommended|Surge
-surge-redirect-rewrite|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Surge/Redirect/Redirect.sgmodule|recommended|Surge
-loon-advertising-rewrite|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Loon/Advertising/Advertising.plugin|recommended|Loon
-loon-redirect-rewrite|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Loon/Redirect/Redirect.plugin|recommended|Loon
-surge-apple-rules|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Surge/Apple/Apple_All_No_Resolve.list|core|Surge
-emby-qx-rules|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/QuantumultX/Emby/Emby.list|recommended|QuantumultX
-emby-surge-rules|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Surge/Emby/Emby.list|recommended|Surge
-emby-loon-rules|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Loon/Emby/Emby.list|recommended|Loon
+surge-advertising-rewrite|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Surge/Advertising/Advertising.sgmodule|recommended|Surge
+surge-redirect-rewrite|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Surge/Redirect/Redirect.sgmodule|recommended|Surge
+loon-advertising-rewrite|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Loon/Advertising/Advertising.plugin|recommended|Loon
+loon-redirect-rewrite|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Loon/Redirect/Redirect.plugin|recommended|Loon
+surge-apple-rules|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Apple/Apple_All_No_Resolve.list|core|Surge
+emby-qx-rules|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Emby/Emby.list|recommended|QuantumultX
+emby-surge-rules|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Emby/Emby.list|recommended|Surge
+emby-loon-rules|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Emby/Emby.list|recommended|Loon
+surge-youtube-module|https://raw.githubusercontent.com/Maasea/sgmodule/master/YouTube.Enhance.sgmodule|recommended|Surge
+surge-spotify-module|https://raw.githubusercontent.com/app2smile/rules/master/module/spotify.module|experimental|Surge iOS 15+
+surge-bilibili-module|https://raw.githubusercontent.com/app2smile/rules/master/module/bilibili.sgmodule|experimental|Surge
+loon-spotify-plugin|https://raw.githubusercontent.com/app2smile/rules/master/plugin/spotify.plugin|experimental|Loon
+loon-bilibili-plugin|https://raw.githubusercontent.com/app2smile/rules/master/plugin/bilibili.plugin|experimental|Loon

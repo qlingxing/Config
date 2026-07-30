@@ -25,7 +25,7 @@ jobs:
       - name: Validate source files
         run: |
           sh -n scripts/*.sh
-          jq empty source/versions.json source/regions.json source/modules.json
+          jq empty source/regions.json source/modules.json
           git diff --check
           git diff --exit-code
 

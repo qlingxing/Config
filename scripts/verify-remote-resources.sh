@@ -3,7 +3,6 @@ set -eu
 
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 MANIFEST="$ROOT/source/remote-resources.txt"
-SUB_STORE_VERSION=$(jq -er '.subStore' "$ROOT/source/versions.json")
 failed=0
 pids=''
 
@@ -11,8 +10,6 @@ while IFS='|' read -r name url tier clients <&3; do
   case "$name" in
     ''|'#'*) continue ;;
   esac
-
-  url=$(printf '%s' "$url" | sed "s/{{SUB_STORE_VERSION}}/$SUB_STORE_VERSION/g")
 
   (
     status=$(/usr/bin/curl -L --retry 2 --retry-all-errors --max-time 30 --connect-timeout 8 -s -o /dev/null -w '%{http_code}' "$url" </dev/null || true)

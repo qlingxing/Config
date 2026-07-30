@@ -8,8 +8,6 @@ artifacts.
   intentionally keeps to the established Mac 5 policy-group syntax.
 - `quantumultx/` and `loon/`: native source profiles copied to their client
   import paths by the build script.
-- `versions.json`: the single release version used by generated Sub-Store
-  integrations.
 - `regions.json`: shared country-tag expressions rendered into every client.
 - `modules.json`: machine-readable module ownership, tier, and MITM scope.
 - `remote-resources.txt`: essential remote dependencies checked by the verifier.

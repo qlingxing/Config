@@ -4,7 +4,7 @@ Personal routing configurations for Quantumult X, Surge, and Loon.
 
 | Client | Entry | Platform | Support status |
 | --- | --- | --- | --- |
-| Surge | `Surge/macOS/Surge-5.conf` | macOS | Maintained: Surge Mac 5.0+ |
+| Surge | `Surge/macOS/Surge-5.conf` | macOS | Maintained: Surge Mac 5.7+ |
 | Surge | `Surge/macOS/Surge-6.conf` | macOS | Maintained: Surge Mac 6.0+ |
 | Surge | `Surge/iOS/Surge-6.conf` | iOS, iPadOS | Maintained: current Surge iOS |
 | Loon | `Loon/Loon.conf` | iOS, iPadOS | Maintained base profile |
@@ -25,18 +25,20 @@ directly in the corresponding client:
 | Quantumult X | `https://raw.githubusercontent.com/qlingxing/Config/main/QuantumultX/qlingxing.conf` |
 
 These profiles contain an active local Sub-Store `All` product URL but no
-provider URL or node credential. Enable the official Sub-Store integration
-before import, then add provider subscriptions and manual nodes locally; see
+provider URL or node credential. Install the official Surge module before a
+Surge profile; Loon and QX load their official integration during profile
+import. Then add provider subscriptions and manual nodes locally; see
 `local/README.md`.
 
 ## Design
 
 - Base profiles accept both manual nodes and subscription nodes. Each client has
-  an `All Nodes` group for direct selection without relying on a country tag.
+  a `全部节点` group for direct selection without relying on a country tag.
   URLs and node credentials are added locally and never committed here.
-- MITM, rewrites, and service-specific tweaks are optional modules. Read the
-  client module documentation before enabling them. Sub-Store is the recommended
-  subscription-management module for every supported client.
+- MITM, rewrites, and service-specific tweaks are platform-specific. QX enables
+  its recommended rewrite set; Surge and Loon expose optional remote modules or
+  plugins. Sub-Store is the recommended subscription-management integration for
+  every supported client.
 - Surge 6 has dedicated macOS and iOS entry points. The routing model stays
   aligned; platform-specific settings are kept in the appropriate profile.
 
@@ -58,10 +60,11 @@ The first command regenerates Surge macOS/iOS profiles and copies the native
 Quantumult X/Loon sources to their client import paths.
 The second verifies the core remote module and ruleset dependencies listed in
 `source/remote-resources.txt`; the third verifies every active URL in the
-generated profiles and core modules; the fourth validates rendered templates,
-Sub-Store version consistency, country-tag regression cases, and policy-group
-references. DNS, health-check, and CORS endpoint URLs are checked by their
-clients at runtime and are excluded from HTTP resource download validation.
+generated profiles and maintained modules; the fourth validates rendered
+templates, official Sub-Store integration presence, country-tag regression
+cases, and policy-group references. DNS, health-check, and CORS endpoint URLs
+are checked by their clients at runtime and are excluded from HTTP resource
+download validation.
 
 GitHub Actions runs build and semantic validation on every push or pull request.
 Remote-resource health checks run daily and can also be started manually from

@@ -11,6 +11,7 @@ using any rewrite that requires it.
 | Recommended | YouTube advertising rewrite | Enabled | Requires the upstream rewrite's MITM hosts |
 | Recommended | Advertising rewrite | Enabled | App and web advertising cleanup; some URL rules need MITM |
 | Recommended | Redirect rewrite | Enabled | Web redirection cleanup |
+| Optional | Advertising Lite domain rules | Disabled | Enable only when rewrite-based blocking is insufficient |
 | Diagnostic | Streaming availability task | Enabled | Runs only when manually opened |
 | Experimental | Spotify enhancement | Disabled | Partial client-side behavior changes; requires Spotify MITM hosts |
 | Experimental | BiliBili enhancement | Disabled | Alters selected app responses; requires BiliBili MITM hosts |
@@ -23,7 +24,9 @@ subscription URLs, or account tokens to this repository.
 After importing the base profile, generate and trust the QX MITM certificate,
 then open `https://sub.store` while QX is running. Add provider subscriptions
 inside Sub-Store or add raw subscriptions under `[server_remote]` in the local
-copy of the profile.
+copy of the profile. Create the `All` collection, then manually update the
+`Sub-Store All` server resource once; an initial update attempted during import
+can fail before the local integration is ready.
 
 If the Sub-Store page reports that its server did not respond, open
 `https://sub.store/api/utils/env`. It must return environment/version data. If

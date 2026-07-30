@@ -45,10 +45,11 @@ and Loon in the same change.
 
 ## Resource Lifecycle
 
-Use release artifacts for rules and rewrites whenever the upstream provides
-them. `master` is reserved only for dependencies without a release channel.
-Sub-Store's release version is maintained once in `source/versions.json` and
-rendered into all clients. Run both resource verifiers and
+Use the upstream's actively maintained artifact. The blackmatrix7 `release`
+branch is frozen, so maintained profiles use its current `master` resources.
+Sub-Store integrations always use the official client URLs and follow the
+official latest release. Run both resource verifiers and
 `scripts/validate-profiles.sh` before publishing. The manifest verifier checks
 the named core dependencies in `source/remote-resources.txt`; the active-resource
-verifier scans every enabled URL in generated profiles and core modules.
+verifier scans every enabled URL in generated profiles and maintained local
+modules.

@@ -1,3 +1,3 @@
 [server_remote]
 # https://example.com/subscription, tag=Raw Subscription, enabled=true
-# https://sub.store/download/collection?target=qx, tag=Sub-Store Product, enabled=true
+# https://sub.store/download/collection/All?target=QX, tag=Sub-Store All, enabled=true

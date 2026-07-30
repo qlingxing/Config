@@ -23,10 +23,14 @@ The base profile downloads Sub-Store's official Loon plugin directly, which is
 visible immediately after importing `Loon.conf` on networks that can reach
 GitHub. Generate and trust Loon's MITM certificate, then open
 `https://sub.store` to manage subscriptions and production. The official
-plugin routes the frontend through Loon's standard `PROXY` policy. The profile
-also lists advertising, redirect, Spotify, YouTube,
-BiliBili, and legacy Emby plugins as disabled opt-ins; enable one at a time
-after checking the affected app.
+plugin routes the frontend according to the plugin mapping in the profile. The
+profile also lists advertising, redirect, Spotify, and BiliBili plugins as
+disabled opt-ins; enable one at a time after checking the affected app. No
+generic Emby unlock or directly maintained YouTube Loon plugin is advertised.
+
+On the first import, `Sub-Store All` can update before the plugin and local
+certificate are ready. After trusting the certificate and creating the `All`
+collection, update that remote proxy once from Loon's Remote Proxy screen.
 
 `sub.store` is a local rewrite endpoint rather than a public Sub-Store website.
 Keep the Sub-Store plugin enabled before opening that URL.

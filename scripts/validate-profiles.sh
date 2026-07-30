@@ -2,16 +2,13 @@
 set -eu
 
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
-VERSION_FILE="$ROOT/source/versions.json"
 REGION_FILE="$ROOT/source/regions.json"
-VERSION=$(jq -er '.subStore' "$VERSION_FILE")
 
 generated_files='
   QuantumultX/qlingxing.conf
   Surge/macOS/Surge-5.conf
   Surge/macOS/Surge-6.conf
   Surge/iOS/Surge-6.conf
-  Surge/Module/Surge.sgmodule
   Loon/Loon.conf
 '
 
@@ -19,33 +16,14 @@ failed=0
 
 for relative_path in $generated_files; do
   file="$ROOT/$relative_path"
-  if rg -n '\{\{(SUB_STORE_VERSION|REGION_[A-Z_]+)\}\}' "$file" >/dev/null; then
+  if rg -n '\{\{(SUB_STORE_TARGET|REGION_[A-Z_]+)\}\}' "$file" >/dev/null; then
     printf 'FAIL unresolved template variable in %s\n' "$relative_path" >&2
-    failed=1
-  fi
-done
-
-for relative_path in \
-  source/surge/Sub-Store.sgmodule \
-  source/remote-resources.txt; do
-  if ! rg -q '\{\{SUB_STORE_VERSION\}\}' "$ROOT/$relative_path"; then
-    printf 'FAIL missing Sub-Store version template in %s\n' "$relative_path" >&2
     failed=1
   fi
 done
 
 if ! rg -q 'sub-store-org/Sub-Store/master/config/QX\.snippet,tag=Sub-Store' "$ROOT/QuantumultX/qlingxing.conf"; then
   printf 'FAIL Quantumult X is missing its official named Sub-Store module entry\n' >&2
-  failed=1
-fi
-
-versions=$(rg -o 'releases/download/[0-9]+\.[0-9]+\.[0-9]+' \
-  "$ROOT/Surge/Module/Surge.sgmodule" |
-  sed 's#.*releases/download/##' |
-  sort -u)
-
-if [ "$versions" != "$VERSION" ]; then
-  printf 'FAIL Sub-Store versions must be %s, found: %s\n' "$VERSION" "${versions:-none}" >&2
   failed=1
 fi
 
@@ -94,15 +72,42 @@ function section(content, start, end) {
   return endIndex < 0 ? remaining : remaining.slice(0, endIndex);
 }
 
+function validateReferences(relativePath, references, policies) {
+  for (const target of references) {
+    if (target && !policies.has(target) && !builtins.has(target)) {
+      console.error(`FAIL ${relativePath} references unknown policy group: ${target}`);
+      failed = true;
+    }
+  }
+}
+
+function surgeGroupReferences(line) {
+  const equals = line.indexOf('=');
+  if (equals < 0) return [];
+  const fields = line.slice(equals + 1).split(',').map(normalizePolicy);
+  const references = [];
+  for (const field of fields.slice(1)) {
+    const included = field.match(/^include-other-group=(.+)$/);
+    if (included) references.push(normalizePolicy(included[1]));
+    else if (field && !field.includes('=')) references.push(field);
+  }
+  return references;
+}
+
 function validateSurge(relativePath) {
   const content = fs.readFileSync(`${root}/${relativePath}`, 'utf8');
   const allNodesGroup = '全部节点';
   const proxyGroup = '代理';
   const groups = new Set();
+  const groupReferences = [];
   for (const line of section(content, '[Proxy Group]', '[Rule]').split('\n')) {
     const match = line.match(/^([^#=]+?)\s*=\s*/);
-    if (match) groups.add(match[1].trim());
+    if (match) {
+      groups.add(match[1].trim());
+      groupReferences.push(...surgeGroupReferences(line));
+    }
   }
+  validateReferences(relativePath, groupReferences, groups);
   const targets = [];
   for (const line of section(content, '[Rule]').split('\n')) {
     if (/^(RULE-SET|DOMAIN|DOMAIN-SUFFIX|IP-CIDR),/.test(line)) targets.push(normalizePolicy(line.split(',')[2]));
@@ -131,20 +136,47 @@ function validateSurge(relativePath) {
     console.error(`FAIL ${relativePath} must default 代理 to DIRECT before setup`);
     failed = true;
   }
+  if (relativePath === 'Surge/macOS/Surge-5.conf') {
+    if (!groups.has('节点来源') || !/^节点来源\s*=\s*select,(?![^\n]*DIRECT)/m.test(content)) {
+      console.error(`FAIL ${relativePath} must keep DIRECT out of 节点来源`);
+      failed = true;
+    }
+    if (!/^自动选择\s*=\s*smart,[^\n]*include-other-group=节点来源/m.test(content)) {
+      console.error(`FAIL ${relativePath} must build smart selection from 节点来源`);
+      failed = true;
+    }
+    const remoteRuleCount = (content.match(/^RULE-SET,https:\/\//gm) || []).length;
+    if (remoteRuleCount < 10) {
+      console.error(`FAIL ${relativePath} is missing full service routing`);
+      failed = true;
+    }
+  }
 }
 
 function validateLoon() {
   const relativePath = 'Loon/Loon.conf';
   const content = fs.readFileSync(`${root}/${relativePath}`, 'utf8');
   const groups = new Set();
+  const groupReferences = [];
   for (const line of section(content, '[Proxy Group]', '[Remote Rule]').split('\n')) {
     const match = line.match(/^([^#=]+?)\s*=\s*/);
-    if (match) groups.add(match[1].trim());
+    if (match) {
+      groups.add(match[1].trim());
+      groupReferences.push(...surgeGroupReferences(line));
+    }
   }
+  validateReferences(relativePath, groupReferences, groups);
   const targets = [];
   for (const line of section(content, '[Remote Rule]', '[Rule]').split('\n')) {
     const match = line.match(/(?:^|,)\s*policy=([^,]+)/);
     if (match) targets.push(match[1].trim());
+  }
+  const remoteRules = section(content, '[Remote Rule]', '[Plugin]');
+  const chinaIndex = remoteRules.indexOf('/China/China.list');
+  const proxyIndex = remoteRules.indexOf('/Proxy/Proxy.list');
+  if (chinaIndex < 0 || proxyIndex < 0 || chinaIndex > proxyIndex) {
+    console.error(`FAIL ${relativePath} must load China before aggregate Proxy rules`);
+    failed = true;
   }
   for (const line of section(content, '[Rule]').split('\n')) {
     const fields = line.split(',');
@@ -175,14 +207,39 @@ function validateQuantumultX() {
   const relativePath = 'QuantumultX/qlingxing.conf';
   const content = fs.readFileSync(`${root}/${relativePath}`, 'utf8');
   const policies = new Set();
+  const policyLines = [];
   for (const line of section(content, '[policy]', '[filter_remote]').split('\n')) {
     const match = line.match(/^(?:static|url-latency-benchmark)=([^,]+)/);
-    if (match) policies.add(match[1].trim());
+    if (match) {
+      policies.add(match[1].trim());
+      policyLines.push(line);
+    }
   }
+  const policyReferences = [];
+  for (const line of policyLines) {
+    const fields = line.slice(line.indexOf('=') + 1).split(',').map(normalizePolicy);
+    for (const field of fields.slice(1)) {
+      if (field && !field.includes('=')) policyReferences.push(field);
+    }
+  }
+  validateReferences(relativePath, policyReferences, policies);
   const targets = [];
-  for (const line of section(content, '[filter_remote]', '[filter_local]').split('\n')) {
+  const remoteFilters = section(content, '[filter_remote]', '[filter_local]');
+  for (const line of remoteFilters.split('\n')) {
     const match = line.match(/force-policy=([^,]+)/);
     if (match) targets.push(match[1].trim());
+  }
+  const mainlandIndex = remoteFilters.indexOf('/China/China.list');
+  const advertisingIndex = remoteFilters.indexOf('/AdvertisingLite/AdvertisingLite.list');
+  const globalIndex = remoteFilters.indexOf('/Global/Global.list');
+  if (mainlandIndex < 0 || advertisingIndex < 0 || globalIndex < 0 ||
+      mainlandIndex > globalIndex || advertisingIndex > globalIndex) {
+    console.error(`FAIL ${relativePath} must load Mainland and Advertising before Global`);
+    failed = true;
+  }
+  if (/\/Advertising\/Advertising\.list,[^\n]*enabled=true/.test(remoteFilters)) {
+    console.error(`FAIL ${relativePath} must not enable the full Advertising list by default`);
+    failed = true;
   }
   for (const line of section(content, '[filter_local]', '[http_backend]').split('\n')) {
     const fields = line.split(',').map((value) => value.trim());

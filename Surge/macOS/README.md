@@ -1,6 +1,6 @@
 # Surge for macOS
 
-Use `Surge-5.conf` with Surge Mac 5.0 or newer. Use `Surge-6.conf` only with
+Use `Surge-5.conf` with Surge Mac 5.7 or newer. Use `Surge-6.conf` only with
 Surge Mac 6.0 or newer. Both profiles enable the Surge web dashboard and use
 the same routing and optional module set. The Mac 5 profile uses the `smart`
 region-group syntax already verified by the prior Mac 5 profile. Its General
@@ -20,9 +20,7 @@ configuration cannot install modules automatically.
 | Module | URL |
 | --- | --- |
 | Sub-Store | `https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/config/Surge.sgmodule` |
-| Advertising rewrite | `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Surge/Advertising/Advertising.sgmodule` |
-| Redirect cleanup | `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Surge/Redirect/Redirect.sgmodule` |
-| YouTube enhancement | `https://raw.githubusercontent.com/qlingxing/Config/refs/heads/main/Surge/Module/YouTube.Enhance.sgmodule` |
-| Spotify experimental | `https://raw.githubusercontent.com/qlingxing/Config/refs/heads/main/Surge/Module/spotify.module` |
-| BiliBili experimental | `https://raw.githubusercontent.com/qlingxing/Config/refs/heads/main/Surge/Modules/BiliBili-AdBlock.sgmodule` |
-| Emby public-service experimental | `https://raw.githubusercontent.com/qlingxing/Config/refs/heads/main/Surge/Modules/Emby-Public-Experimental.sgmodule` |
+| Advertising rewrite | `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Surge/Advertising/Advertising.sgmodule` |
+| Redirect cleanup | `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Surge/Redirect/Redirect.sgmodule` |
+| YouTube enhancement | `https://raw.githubusercontent.com/Maasea/sgmodule/master/YouTube.Enhance.sgmodule` |
+| BiliBili experimental | `https://raw.githubusercontent.com/app2smile/rules/master/module/bilibili.sgmodule` |

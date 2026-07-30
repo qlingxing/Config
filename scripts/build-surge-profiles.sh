@@ -3,10 +3,8 @@ set -eu
 
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 SOURCE="$ROOT/source/surge"
-VERSION_FILE="$ROOT/source/versions.json"
 REGION_FILE="$ROOT/source/regions.json"
 
-SUB_STORE_VERSION=$(jq -er '.subStore' "$VERSION_FILE")
 REGION_HONG_KONG=$(jq -er '.hongKong' "$REGION_FILE")
 REGION_JAPAN=$(jq -er '.japan' "$REGION_FILE")
 REGION_SINGAPORE=$(jq -er '.singapore' "$REGION_FILE")
@@ -17,7 +15,6 @@ REGION_TAIWAN=$(jq -er '.taiwan' "$REGION_FILE")
 render_template() {
   sub_store_target=$2
   awk \
-    -v sub_store_version="$SUB_STORE_VERSION" \
     -v sub_store_target="$sub_store_target" \
     -v region_hong_kong="$REGION_HONG_KONG" \
     -v region_japan="$REGION_JAPAN" \
@@ -26,7 +23,6 @@ render_template() {
     -v region_united_kingdom="$REGION_UNITED_KINGDOM" \
     -v region_taiwan="$REGION_TAIWAN" '
       {
-        gsub(/\{\{SUB_STORE_VERSION\}\}/, sub_store_version)
         gsub(/\{\{SUB_STORE_TARGET\}\}/, sub_store_target)
         gsub(/\{\{REGION_HONG_KONG\}\}/, region_hong_kong)
         gsub(/\{\{REGION_JAPAN\}\}/, region_japan)
@@ -63,7 +59,7 @@ build_profile() {
   mv "$temporary" "$target"
 }
 
-build_profile macos5.general.conf macOS/Surge-5.conf macos5.routing.conf SurgeMac 'Surge Mac 5.0+ base profile'
+build_profile macos5.general.conf macOS/Surge-5.conf macos5.routing.conf SurgeMac 'Surge Mac 5.7+ base profile'
 build_profile macos.general.conf macOS/Surge-6.conf routing.conf SurgeMac 'Surge Mac 6.0+ base profile'
 build_profile ios.general.conf iOS/Surge-6.conf routing.conf Surge 'Surge iOS and iPadOS base profile'
 
@@ -78,7 +74,3 @@ build_copy() {
 
 build_copy "$ROOT/source/quantumultx/qlingxing.conf" "$ROOT/QuantumultX/qlingxing.conf"
 build_copy "$ROOT/source/loon/Loon.conf" "$ROOT/Loon/Loon.conf"
-build_copy "$ROOT/source/surge/Sub-Store.sgmodule" "$ROOT/Surge/Module/Surge.sgmodule"
-build_copy "$ROOT/source/surge/Spotify.module" "$ROOT/Surge/Module/spotify.module"
-build_copy "$ROOT/source/surge/BiliBili-AdBlock.sgmodule" "$ROOT/Surge/Modules/BiliBili-AdBlock.sgmodule"
-build_copy "$ROOT/source/surge/Emby-Public-Experimental.sgmodule" "$ROOT/Surge/Modules/Emby-Public-Experimental.sgmodule"

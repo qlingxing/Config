@@ -1,8 +1,5 @@
 {
   "schemaVersion": 1,
-  "versions": {
-    "subStore": "source/versions.json"
-  },
   "tiers": ["core", "recommended", "experimental", "legacy"],
   "modules": [
     {
@@ -11,7 +8,7 @@
       "purpose": "subscription management, synchronization, and production",
       "clients": {
         "quantumultX": "official config/QX.snippet remote resource in QuantumultX/qlingxing.conf",
-        "surge": "Surge/Module/Surge.sgmodule",
+        "surge": "official config/Surge.sgmodule URL documented in Surge/Modules/README.md",
         "loon": "official config/Loon.plugin remote resource in Loon/Loon.conf"
       },
       "mitm": ["sub.store"]
@@ -43,9 +40,9 @@
       "tier": "experimental",
       "purpose": "service-specific response modification; account entitlements are not guaranteed",
       "clients": {
-        "quantumultX": "disabled Spotify, BiliBili, and host-specific Emby rewrites",
-        "surge": "Surge/Module/spotify.module and Surge/Modules/BiliBili-AdBlock.sgmodule",
-        "loon": "not included in the base profile; add a directly maintained upstream plugin when needed"
+        "quantumultX": "disabled official-upstream Spotify, BiliBili, and host-specific Emby rewrites",
+        "surge": "direct upstream YouTube, Spotify (iOS 15+), and BiliBili module URLs; no generic Emby unlock",
+        "loon": "disabled direct upstream Spotify and BiliBili plugins"
       },
       "mitm": ["service-specific"],
       "defaultEnabled": false
@@ -56,7 +53,7 @@
       "purpose": "route known Emby service domains to a selectable proxy policy",
       "clients": {
         "quantumultX": "enabled in QuantumultX/qlingxing.conf",
-        "surge": "routing enabled in Surge/macOS/Surge-6.conf and Surge/iOS/Surge-6.conf; selector only in the local-rule Surge/macOS/Surge-5.conf",
+        "surge": "routing enabled in maintained Surge Mac and iOS profiles",
         "loon": "enabled in Loon/Loon.conf"
       },
       "mitm": []

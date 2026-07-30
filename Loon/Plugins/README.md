@@ -8,8 +8,11 @@ and trust Loon's MITM certificate before enabling a rewrite or response plugin.
 | Tier | Plugin | Source | MITM |
 | --- | --- | --- | --- |
 | Core | Sub-Store | Official `config/Loon.plugin` | `sub.store` only |
-| Recommended | Advertising rewrite | `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Loon/Advertising/Advertising.plugin` | Required for URL rules |
-| Recommended | Redirect cleanup | `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rewrite/Loon/Redirect/Redirect.plugin` | Check upstream hosts |
+| Recommended | Advertising rewrite | `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Loon/Advertising/Advertising.plugin` | Required for URL rules |
+| Recommended | Redirect cleanup | `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rewrite/Loon/Redirect/Redirect.plugin` | Check upstream hosts |
+| Experimental | Spotify enhancement | `https://raw.githubusercontent.com/app2smile/rules/master/plugin/spotify.plugin` | Spotify API hosts |
+| Experimental | BiliBili enhancement | `https://raw.githubusercontent.com/app2smile/rules/master/plugin/bilibili.plugin` | BiliBili API hosts |
+
 The base profile already handles domain-level routing. Plugins that alter
 service responses, subscriptions, entitlements, or login state are not part of
 the base configuration. Add only a directly maintained upstream plugin after
