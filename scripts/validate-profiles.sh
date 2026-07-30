@@ -96,6 +96,12 @@ function surgeGroupReferences(line) {
 
 function validateSurge(relativePath) {
   const content = fs.readFileSync(`${root}/${relativePath}`, 'utf8');
+  const managedUrl = `https://raw.githubusercontent.com/qlingxing/Config/main/${relativePath}`;
+  const expectedManagedHeader = `#!MANAGED-CONFIG ${managedUrl} interval=86400 strict=false`;
+  if (content.split(/\r?\n/, 1)[0] !== expectedManagedHeader) {
+    console.error(`FAIL ${relativePath} must start with its managed configuration URL`);
+    failed = true;
+  }
   const allNodesGroup = '全部节点';
   const proxyGroup = '代理';
   const groups = new Set();
