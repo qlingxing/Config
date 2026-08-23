@@ -10,9 +10,9 @@ Append the contents of `QuantumultX/Local/ServerRemote.private.conf.example` to
 the imported profile when adding raw or Sub-Store production subscriptions.
 Manual nodes belong in `[server_local]` in the same active profile; use
 `QuantumultX/Local/ServerLocal.private.conf.example` as the local template. The QX
-`全部节点` policy selects every resource with `resource-tag-regex=.*` and every
-node with `server-tag-regex=.*`, so nodes added outside the active profile are
-not visible to this policy.
+`全部节点` explicitly merges QX's `已保存` resource with `Sub-Store All`, then
+selects every node from both resources. Nodes added under another resource tag
+must be added to the resource expression before they can appear in this policy.
 
 ## Loon
 
