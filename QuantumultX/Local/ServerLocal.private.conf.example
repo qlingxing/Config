@@ -1,0 +1,4 @@
+[server_local]
+# Manual nodes must be added to the active Quantumult X profile's local server
+# section. Keep credentials in this ignored local file or in the app editor.
+# shadowsocks=server.example.com:443, method=aes-256-gcm, password=CHANGE_ME, tag=Manual Node
