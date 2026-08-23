@@ -312,7 +312,11 @@ function validateQuantumultX() {
     failed = true;
   }
   if (!/^static=全部节点,[^\n]*,\s*proxy,[^\n]*resource-tag-regex=\^Sub-Store All\$[^\n]*server-tag-regex=\.\*/m.test(content)) {
-    console.error(`FAIL ${relativePath} must combine built-in proxy with Sub-Store All in 全部节点`);
+    console.error(`FAIL ${relativePath} must expose built-in proxy alongside Sub-Store All in 全部节点`);
+    failed = true;
+  }
+  if (/^url-latency-benchmark=[^\n]*(?:^|,\s*)proxy(?:,|\s|$)/m.test(content)) {
+    console.error(`FAIL ${relativePath} must not use QX's built-in proxy as a latency-test candidate`);
     failed = true;
   }
 }
