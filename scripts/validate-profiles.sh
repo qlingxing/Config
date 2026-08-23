@@ -163,6 +163,10 @@ function validateSurge(relativePath) {
     console.error(`FAIL ${relativePath} must default 代理 to DIRECT before setup`);
     failed = true;
   }
+  if (!/^代理\s*=.*include-other-group=全部节点/m.test(content)) {
+    console.error(`FAIL ${relativePath} must expose all node members in 代理`);
+    failed = true;
+  }
   if (relativePath === 'Surge/macOS/Surge-5.conf') {
     if (!groups.has('节点来源') || !/^节点来源\s*=\s*select,(?![^\n]*DIRECT)/m.test(content)) {
       console.error(`FAIL ${relativePath} must keep DIRECT out of 节点来源`);
@@ -244,6 +248,10 @@ function validateLoon() {
     console.error(`FAIL ${relativePath} must default 代理 to DIRECT before setup`);
     failed = true;
   }
+  if (!/^代理\s*=.*server-tag-regex=\.\*/m.test(content)) {
+    console.error(`FAIL ${relativePath} must expose all node members in 代理`);
+    failed = true;
+  }
 }
 
 function validateQuantumultX() {
@@ -305,6 +313,10 @@ function validateQuantumultX() {
   }
   if (!/^static=代理,\s*direct(?:,|$)/m.test(content)) {
     console.error(`FAIL ${relativePath} must default 代理 to direct before setup`);
+    failed = true;
+  }
+  if (!/^static=代理,[^\n]*server-tag-regex=\.\*/m.test(content)) {
+    console.error(`FAIL ${relativePath} must expose all node members in 代理`);
     failed = true;
   }
 }
