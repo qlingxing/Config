@@ -9,9 +9,9 @@ or store them in ignored `*.private.conf` files as reference material.
 Append the contents of `QuantumultX/Local/ServerRemote.private.conf.example` to
 the imported profile when adding raw or Sub-Store production subscriptions.
 QX's built-in `proxy` policy points to the node currently selected in the
-Nodes screen, including a node from `已保存`. `全部节点` includes this built-in
-policy plus the `Sub-Store All` resource, so select the saved node in the Nodes
-screen when using `proxy`.
+Nodes screen, including a node from `已保存`. The top-level `代理` group exposes
+`proxy` directly, and `全部节点` also includes it alongside `Sub-Store All`.
+Select the saved node in the Nodes screen, then select `proxy` under `代理`.
 
 ## Loon
 

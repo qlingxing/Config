@@ -307,6 +307,10 @@ function validateQuantumultX() {
     console.error(`FAIL ${relativePath} must default 代理 to direct before setup`);
     failed = true;
   }
+  if (!/^static=代理,[^\n]*,\s*proxy(?:,|\s)/m.test(content)) {
+    console.error(`FAIL ${relativePath} must expose QX's built-in proxy policy in 代理`);
+    failed = true;
+  }
   if (!/^static=全部节点,[^\n]*,\s*proxy,[^\n]*resource-tag-regex=\^Sub-Store All\$[^\n]*server-tag-regex=\.\*/m.test(content)) {
     console.error(`FAIL ${relativePath} must combine built-in proxy with Sub-Store All in 全部节点`);
     failed = true;
