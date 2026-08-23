@@ -307,8 +307,8 @@ function validateQuantumultX() {
     console.error(`FAIL ${relativePath} must default 代理 to direct before setup`);
     failed = true;
   }
-  if (!/^static=全部节点,[^\n]*resource-tag-regex=\^\(Manual Nodes\|Sub-Store All\)\$[^\n]*server-tag-regex=\.\*/m.test(content)) {
-    console.error(`FAIL ${relativePath} must merge Manual Nodes and Sub-Store All in 全部节点`);
+  if (!/^static=全部节点,[^\n]*,\s*proxy,[^\n]*resource-tag-regex=\^Sub-Store All\$[^\n]*server-tag-regex=\.\*/m.test(content)) {
+    console.error(`FAIL ${relativePath} must combine built-in proxy with Sub-Store All in 全部节点`);
     failed = true;
   }
 }

@@ -8,11 +8,10 @@ or store them in ignored `*.private.conf` files as reference material.
 
 Append the contents of `QuantumultX/Local/ServerRemote.private.conf.example` to
 the imported profile when adding raw or Sub-Store production subscriptions.
-QX's built-in `已保存` pool cannot be referenced by `resource-tag-regex`. To
-merge manual nodes with Sub-Store, create a local `servers.snippet` under
-`Quantumult X/Profiles`, add `servers.snippet, tag=Manual Nodes, enabled=true`
-under `[server_remote]`, and put the manual node definitions in that file.
-`全部节点` then merges `Manual Nodes` with `Sub-Store All`.
+QX's built-in `proxy` policy points to the node currently selected in the
+Nodes screen, including a node from `已保存`. `全部节点` includes this built-in
+policy plus the `Sub-Store All` resource, so select the saved node in the Nodes
+screen when using `proxy`.
 
 ## Loon
 
