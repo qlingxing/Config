@@ -6,16 +6,14 @@ repository; use `../Surge/macOS/Surge-6.conf` on a Mac with Surge 6.
 The profile supports two node inputs at once:
 
 1. Add or paste individual nodes in Loon's Proxy screen. They are stored in
-   `[Proxy]`; choose Loon's built-in `PROXY` entry under `代理` or `全部节点` to
-   use the local manual node.
+   `[Proxy]` and are included by the profile's all-node and regional filters.
 2. Add a provider subscription in Loon's Remote Proxy screen, or replace the
    commented `[Remote Proxy]` sample using Loon's `Name = URL` syntax.
 
-`Sub-Store All` is expanded into `全部节点`, `自动选择`, and the regional groups.
-Loon does not dynamically enumerate arbitrary local `[Proxy]` names in a
-managed group. For more than one named manual choice, append those names to a
-`select` group in the editable local profile. Select the desired node once in
-`代理`; service policies inherit it by default, while retaining regional
+Loon's unscoped `NameRegex` filters read the complete node inventory. Therefore
+`全部节点` and `自动选择` include both local `[Proxy]` nodes and `Sub-Store All`;
+the regional groups apply the same behavior after matching node names. Select
+the desired node once in `代理`; service policies inherit it by default, while retaining regional
 overrides. `全部节点` and `代理` default to `DIRECT` until nodes are configured;
 select `REJECT` in `代理` when strict no-direct behavior is needed. Keep
 subscription URLs, node credentials, and account tokens out of Git. MITM and

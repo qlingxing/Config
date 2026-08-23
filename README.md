@@ -40,9 +40,10 @@ and manual nodes locally; see `local/README.md`.
 
 ## Design
 
-- Base profiles accept both manual nodes and subscription nodes. Surge combines
-  both directly; QX and Loon expose their client built-in current-node policy
-  for manual nodes, while `全部节点` provides direct Sub-Store node selection.
+- Base profiles accept both manual nodes and subscription nodes. Surge and Loon
+  collect both node sources in `全部节点`; QX exposes its client built-in
+  current-node policy for manual nodes while `全部节点` provides direct
+  Sub-Store node selection.
   URLs and node credentials are added locally and never committed here.
 - MITM, rewrites, and service-specific tweaks are platform-specific. QX enables
   its recommended rewrite set; Surge and Loon expose optional remote modules or

@@ -17,12 +17,10 @@ Select the saved node in the Nodes screen, then select `proxy` under `代理`.
 
 Append the contents of `Loon/Local/RemoteProxy.private.conf.example` to the
 imported profile. Use `[Proxy]` for manual nodes and `[Remote Proxy]` for
-subscriptions. Loon cannot dynamically enumerate arbitrary local `[Proxy]`
-names in a managed policy group. The base profile exposes its built-in `PROXY`
-policy in both `代理` and `全部节点`; choose it to use the local manual node.
-The Sub-Store nodes remain individually available through `全部节点` and the
-regional groups. To make several manual nodes appear by name, append each node
-name to the desired `select` group in the editable local copy.
+subscriptions. The base profile's unscoped `NameRegex` filters read Loon's
+complete node inventory, so `全部节点`, `自动选择`, and the regional groups include
+both local `[Proxy]` nodes and Sub-Store nodes. Keep node credentials only in
+the device's local configuration.
 
 ## Surge
 

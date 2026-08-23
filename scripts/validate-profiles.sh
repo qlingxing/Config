@@ -58,7 +58,7 @@ checkRegion('unitedStates', ['US-01', 'USA 01', 'United States 01', '美国 01']
 checkRegion('unitedKingdom', ['UK-01', 'GB 01', 'United Kingdom 01', '英国 01'], ['Ukraine 01']);
 checkRegion('taiwan', ['TW-01', 'Taiwan 01', '台湾 01'], ['Network TWX']);
 
-const builtins = new Set(['DIRECT', 'PROXY', 'REJECT', 'REJECT-DROP', 'direct', 'reject', 'proxy']);
+const builtins = new Set(['DIRECT', 'REJECT', 'REJECT-DROP', 'direct', 'reject', 'proxy']);
 
 function normalizePolicy(value) {
   return value.trim().replace(/^"(.*)"$/, '$1');
@@ -203,12 +203,12 @@ function validateLoon() {
   }
   const remoteFilters = new Set();
   for (const line of section(content, '[Remote Filter]', '[Proxy Group]').split('\n')) {
-    const match = line.match(/^([^#=]+?)\s*=\s*NameRegex,\s*Sub-Store All,\s*FilterKey\s*=/);
+    const match = line.match(/^([^#=]+?)\s*=\s*NameRegex,\s*FilterKey\s*=/);
     if (match) remoteFilters.add(match[1].trim());
   }
-  for (const filter of ['香港订阅', '日本订阅', '新加坡订阅', '美国订阅', '台湾订阅']) {
+  for (const filter of ['所有节点筛选', '香港节点筛选', '日本节点筛选', '新加坡节点筛选', '美国节点筛选', '台湾节点筛选']) {
     if (!remoteFilters.has(filter)) {
-      console.error(`FAIL ${relativePath} is missing the ${filter} Sub-Store remote filter`);
+      console.error(`FAIL ${relativePath} is missing the ${filter} all-node filter`);
       failed = true;
     }
   }
@@ -257,16 +257,16 @@ function validateLoon() {
     console.error(`FAIL ${relativePath} must default 代理 to DIRECT before setup`);
     failed = true;
   }
-  if (!/^全部节点\s*=\s*select,\s*DIRECT,\s*PROXY,\s*Sub-Store All\s*$/m.test(content)) {
-    console.error(`FAIL ${relativePath} must expose local PROXY alongside Sub-Store All`);
+  if (!/^全部节点\s*=\s*select,\s*DIRECT,\s*所有节点筛选\s*$/m.test(content)) {
+    console.error(`FAIL ${relativePath} must build 全部节点 from Loon's all-node filter`);
     failed = true;
   }
-  if (!/^代理\s*=\s*select,\s*DIRECT,\s*PROXY(?:,|$)/m.test(content)) {
-    console.error(`FAIL ${relativePath} must expose Loon's built-in PROXY policy`);
+  if (/^全部节点\s*=\s*select,[^\n]*\bPROXY\b/m.test(content)) {
+    console.error(`FAIL ${relativePath} must not use Loon's single-node PROXY policy as an all-node pool`);
     failed = true;
   }
-  if (!/^自动选择\s*=\s*url-test,\s*Sub-Store All,(?![^\n]*\bPROXY\b)/m.test(content)) {
-    console.error(`FAIL ${relativePath} must only use Sub-Store All in url-test`);
+  if (!/^自动选择\s*=\s*url-test,\s*所有节点筛选,(?![^\n]*\bPROXY\b)/m.test(content)) {
+    console.error(`FAIL ${relativePath} must test Loon's all-node filter`);
     failed = true;
   }
 }
