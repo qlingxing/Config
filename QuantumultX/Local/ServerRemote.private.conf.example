@@ -1,3 +1,8 @@
 [server_remote]
 # https://example.com/subscription, tag=Raw Subscription, enabled=true
 # https://sub.store/download/collection/All?target=QX, tag=Sub-Store All, enabled=true
+
+# QX cannot expose its built-in 已保存 pool to resource-tag-regex policies.
+# Create Quantumult X/Profiles/servers.snippet locally, put manual nodes in it,
+# then enable this resource. It will be merged by 全部节点.
+# servers.snippet, tag=Manual Nodes, enabled=true
