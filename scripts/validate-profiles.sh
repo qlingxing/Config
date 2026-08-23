@@ -58,7 +58,7 @@ checkRegion('unitedStates', ['US-01', 'USA 01', 'United States 01', '美国 01']
 checkRegion('unitedKingdom', ['UK-01', 'GB 01', 'United Kingdom 01', '英国 01'], ['Ukraine 01']);
 checkRegion('taiwan', ['TW-01', 'Taiwan 01', '台湾 01'], ['Network TWX']);
 
-const builtins = new Set(['DIRECT', 'REJECT', 'REJECT-DROP', 'direct', 'reject', 'proxy']);
+const builtins = new Set(['DIRECT', 'PROXY', 'REJECT', 'REJECT-DROP', 'direct', 'reject', 'proxy']);
 
 function normalizePolicy(value) {
   return value.trim().replace(/^"(.*)"$/, '$1');
@@ -183,7 +183,8 @@ function validateSurge(relativePath) {
 function validateLoon() {
   const relativePath = 'Loon/Loon.conf';
   const content = fs.readFileSync(`${root}/${relativePath}`, 'utf8');
-  const remoteProxies = section(content, '[Remote Proxy]', '[Proxy Group]');
+  const remoteProxies = section(content, '[Remote Proxy]', '[Remote Filter]');
+  const remoteProxyNames = new Set();
   if (!/^Sub-Store All\s*=\s*https:\/\/sub\.store\/download\/collection\/All\?target=Loon\s*$/m.test(remoteProxies)) {
     console.error(`FAIL ${relativePath} must use Loon's Name = URL syntax for the Sub-Store remote proxy`);
     failed = true;
@@ -198,6 +199,18 @@ function validateLoon() {
       console.error(`FAIL ${relativePath} has an invalid Remote Proxy entry: ${value}`);
       failed = true;
     }
+    if (name) remoteProxyNames.add(name);
+  }
+  const remoteFilters = new Set();
+  for (const line of section(content, '[Remote Filter]', '[Proxy Group]').split('\n')) {
+    const match = line.match(/^([^#=]+?)\s*=\s*NameRegex,\s*Sub-Store All,\s*FilterKey\s*=/);
+    if (match) remoteFilters.add(match[1].trim());
+  }
+  for (const filter of ['香港订阅', '日本订阅', '新加坡订阅', '美国订阅', '台湾订阅']) {
+    if (!remoteFilters.has(filter)) {
+      console.error(`FAIL ${relativePath} is missing the ${filter} Sub-Store remote filter`);
+      failed = true;
+    }
   }
   const groups = new Set();
   const groupReferences = [];
@@ -208,7 +221,7 @@ function validateLoon() {
       groupReferences.push(...surgeGroupReferences(line));
     }
   }
-  validateReferences(relativePath, groupReferences, groups);
+  validateReferences(relativePath, groupReferences, new Set([...groups, ...remoteFilters, ...remoteProxyNames]));
   const targets = [];
   for (const line of section(content, '[Remote Rule]', '[Rule]').split('\n')) {
     const match = line.match(/(?:^|,)\s*policy=([^,]+)/);
@@ -242,6 +255,18 @@ function validateLoon() {
   }
   if (!/^代理\s*=\s*select,\s*DIRECT(?:,|$)/m.test(content)) {
     console.error(`FAIL ${relativePath} must default 代理 to DIRECT before setup`);
+    failed = true;
+  }
+  if (!/^全部节点\s*=\s*select,\s*DIRECT,\s*PROXY,\s*Sub-Store All\s*$/m.test(content)) {
+    console.error(`FAIL ${relativePath} must expose local PROXY alongside Sub-Store All`);
+    failed = true;
+  }
+  if (!/^代理\s*=\s*select,\s*DIRECT,\s*PROXY(?:,|$)/m.test(content)) {
+    console.error(`FAIL ${relativePath} must expose Loon's built-in PROXY policy`);
+    failed = true;
+  }
+  if (!/^自动选择\s*=\s*url-test,\s*Sub-Store All,(?![^\n]*\bPROXY\b)/m.test(content)) {
+    console.error(`FAIL ${relativePath} must only use Sub-Store All in url-test`);
     failed = true;
   }
 }
